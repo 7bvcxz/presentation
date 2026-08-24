@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI가 개발자를 대체할 수 있을까요?</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ============ ICON SPRITE ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+ <defs>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 4.5 14H10l-1 8 9.5-12H13l1-8z"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3 21 7.6 12 12.2 3 7.6 12 3z"/><path d="M3 12.2 12 16.8l9-4.6"/><path d="M3 16.6 12 21.2l9-4.6"/></symbol>
+  <symbol id="i-context" viewBox="0 0 24 24"><path d="M10 14.5 14 10.5"/><path d="M12.6 7.4 14.4 5.6a3.9 3.9 0 0 1 5.5 5.5l-1.8 1.8"/><path d="M11.4 17.6 9.6 19.4a3.9 3.9 0 0 1-5.5-5.5l1.8-1.8"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 2.8 20 5.6v6.1c0 5-3.5 8.3-8 9.5-4.5-1.2-8-4.5-8-9.5V5.6l8-2.8z"/><path d="M8.6 12.1 11 14.5l4.6-4.7"/></symbol>
+  <symbol id="i-human" viewBox="0 0 24 24"><circle cx="12" cy="7.6" r="3.6"/><path d="M4.6 20.4a7.4 7.4 0 0 1 14.8 0"/></symbol>
+  <symbol id="i-ai" viewBox="0 0 24 24"><rect x="6.2" y="6.2" width="11.6" height="11.6" rx="2.4"/><rect x="10" y="10" width="4" height="4" rx="1"/><path d="M9.4 3.2v3M14.6 3.2v3M9.4 17.8v3M14.6 17.8v3M3.2 9.4h3M3.2 14.6h3M17.8 9.4h3M17.8 14.6h3"/></symbol>
+  <symbol id="i-monitor" viewBox="0 0 24 24"><rect x="2.6" y="4" width="18.8" height="13" rx="2"/><path d="M9 20.6h6M12 17v3.6"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><rect x="7" y="2.4" width="10" height="19.2" rx="2.4"/><path d="M10.6 18.6h2.8"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6.4 16.4v-4.9a5.6 5.6 0 0 1 11.2 0v4.9l1.9 2.2H4.5l1.9-2.2z"/><path d="M10.2 21.4h3.6"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 2.6h7.4L18.6 8v13.4H6V2.6z"/><path d="M13.2 2.6V8h5.2"/><path d="M9 13h6.4M9 16.6h4.6"/></symbol>
+  <symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="5.6" rx="7.2" ry="3"/><path d="M4.8 5.6v12.6c0 1.7 3.2 3 7.2 3s7.2-1.3 7.2-3V5.6"/><path d="M4.8 11.9c0 1.7 3.2 3 7.2 3s7.2-1.3 7.2-3"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M4.5 12.6 9.4 17.5 19.6 7.2"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6.4 6.4 17.6 17.6M17.6 6.4 6.4 17.6"/></symbol>
+  <symbol id="i-browser" viewBox="0 0 24 24"><rect x="2.6" y="4" width="18.8" height="16" rx="2"/><path d="M2.6 8.8h18.8"/><circle cx="6" cy="6.4" r=".7" fill="currentColor" stroke="none"/><circle cx="8.6" cy="6.4" r=".7" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-cursor" viewBox="0 0 24 24"><path d="M6 3.4 18.4 12.2l-5.1.9 2.7 5.7-2.4 1.2-2.7-5.8-4.9 3.3V3.4z"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 6.8V12l3.6 2.2"/></symbol>
+  <symbol id="i-server" viewBox="0 0 24 24"><rect x="3" y="3.6" width="18" height="5.6" rx="1.6"/><rect x="3" y="14.8" width="18" height="5.6" rx="1.6"/><path d="M6.6 6.4h.01M6.6 17.6h.01"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.6v3M12 18.4v3M2.6 12h3M18.4 12h3M5.4 5.4l2.1 2.1M16.5 16.5l2.1 2.1M18.6 5.4l-2.1 2.1M7.5 16.5l-2.1 2.1"/></symbol>
+  <symbol id="i-branch" viewBox="0 0 24 24"><circle cx="6.4" cy="5.4" r="2.4"/><circle cx="6.4" cy="18.6" r="2.4"/><circle cx="17.6" cy="9.4" r="2.4"/><path d="M6.4 7.8v8.4M17.6 11.8c0 3-3.2 4-6.4 4.4"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3.6 20.4h16.8"/><path d="M6.6 20.4v-7M11.4 20.4V6.6M16.2 20.4v-10"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.6"/><path d="M15.6 15.6 20.4 20.4"/></symbol>
+  <symbol id="i-flask" viewBox="0 0 24 24"><path d="M9.4 3v6.2L4.6 18a2.2 2.2 0 0 0 1.9 3.3h11a2.2 2.2 0 0 0 1.9-3.3l-4.8-8.8V3"/><path d="M8.2 3h7.6M7.4 14.4h9.2"/></symbol>
+ </defs>
+</svg>
+
+<div id="deck">
+<div id="stage">
+
+<!-- ============================================================
+     SLIDE 01 — OPENING
+     ============================================================ -->
+<section class="slide" data-title="들어가면서">
+  <div class="scene center" data-out="4">
+    <p class="lead" data-out="1" style="position:absolute;top:50%;transform:translateY(-50%)">오늘은 이 질문에서 시작해보려고 합니다.</p>
+
+    <h1 class="display" data-step="1" style="max-width:1500px">AI가 개발자를<br>대체할 수 있을까요?</h1>
+
+    <div class="opening-voices row gap40 mt80" data-step="2" data-stagger>
+      <div class="voice">
+        <span class="label">SOMETIMES</span>
+        <p class="h4 mt16">“이 정도면 진짜<br>대체되겠는데?”</p>
+      </div>
+      <div class="voice-div"></div>
+      <div class="voice">
+        <span class="label">SOMETIMES</span>
+        <p class="h4 mt16">“그래도 아직<br>어려움이 많네…”</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="scene center" data-step="4">
+    <span class="label acc">THE REAL QUESTION</span>
+    <h1 class="h1 mt32" style="max-width:1420px">그렇다면 개발자인 나는<br>앞으로 <span class="mark">어떻게 해야 할까?</span></h1>
+  </div>
+
+  <template class="notes"><h5>Page 1 · 들어가면서</h5>
+  <p>오늘은 이 질문에서 시작해보려고 합니다.</p>
+  <p><em>“AI가 개발자를 대체할 수 있을까요?”</em></p>
+  <p>저도 개발을 하면서 이 질문을 계속 하게 됩니다. 어떤 날은 AI가 만들어내는 결과물을 보면서 “이 정도면 진짜 대체되겠는데?” 싶다가도, 또 어떤 날은 “그래도 아직 어려움이 많네…” 하게 됩니다.</p>
+  <p>그래서 오늘 발표는 이 질문에 대한 정답을 드리는 자리는 아닙니다. 대신 <em>제가 직접 확인해 본 과정</em>을 공유드리려고 합니다.</p>
+  <p>결국 중요한 건 이 질문이라고 생각합니다 — <em>“그렇다면 개발자인 나는 앞으로 어떻게 해야 할까?”</em></p>
+  <p><code>Tip</code> 여기서 한 번 청중을 둘러보며 잠깐 쉬어가기.</p></template>
+</section>
+
+<!-- ============================================================
+     SLIDE 02 — AI 개발 Challenge
+     ============================================================ -->
+<section class="slide dark" data-title="AI 개발 Challenge">
+  <div class="scene center" data-out="1">
+    <h1 class="h1">저도 처음에는<br>AI 개발을 <span class="wk">믿지 않았습니다.</span></h1>
+  </div>
+
+  <div class="pad" data-step="1" style="justify-content:space-between">
+    <div>
+      <span class="label">DOUBTS</span>
+      <h2 class="h3 mt16">저도 처음에는 AI 개발을 믿지 않았습니다.</h2>
+    </div>
+
+    <div class="ch-grid">
+      <div class="ch" data-step="1">
+        <span class="ch-no">01</span>
+        <h3 class="h4">복잡한 개발도<br>정말 잘할까?</h3>
+        <p class="sub mt24">Algorithm · Optimization · Compatibility</p>
+      </div>
+      <div class="ch" data-step="2">
+        <span class="ch-no">02</span>
+        <h3 class="h4">프로젝트가 커져도<br>이해할 수 있을까?</h3>
+        <p class="sub mt24">Context · Architecture · Long-term Decisions</p>
+      </div>
+      <div class="ch" data-step="3">
+        <span class="ch-no">03</span>
+        <h3 class="h4">AI가 만든 코드를<br>믿을 수 있을까?</h3>
+        <p class="sub mt24">Quality · Security · Reliability</p>
+      </div>
+    </div>
+
+    <div class="doubt-row row gap16" data-step="4" data-stagger>
+      <span class="chip plain">책임은 누가?</span>
+      <span class="chip plain">개발 실력 퇴화</span>
+      <span class="chip plain">결정권</span>
+      <span class="chip plain">유지보수</span>
+      <span class="chip plain">장애 대응</span>
+      <span class="chip plain">…</span>
+    </div>
+  </div>
+
+  <template class="notes"><h5>Page 2 · AI 개발 Challenge</h5>
+  <p>사실 저도 처음부터 AI 개발을 믿었던 건 아닙니다. 오히려 회의적인 쪽에 가까웠습니다.</p>
+  <ul>
+    <li><em>01 복잡한 개발도 정말 잘할까?</em> — 알고리즘, 최적화, 호환성처럼 난이도가 있는 작업</li>
+    <li><em>02 프로젝트가 커져도 이해할까?</em> — 컨텍스트가 길어지고 아키텍처가 얽히면?</li>
+    <li><em>03 AI가 만든 코드를 믿을 수 있을까?</em> — 품질, 보안, 신뢰성</li>
+  </ul>
+  <p>그리고 여기에 더해서 책임 문제, 개발 실력 퇴화, 결정권, 유지보수, 장애 대응 같은 의문들이 계속 따라옵니다.</p>
+  <p>아마 여기 계신 분들 중에도 비슷한 생각을 하시는 분들이 있을 거라 생각합니다.</p></template>
+</section>
+
+<!-- ============================================================
+     SLIDE 03 — 직접 해보자
+     ============================================================ -->
+<section class="slide" data-title="직접 해보자">
+  <div class="scene center" data-out="1">
+    <h1 class="display">모르겠으면<br><span class="acc">직접 확인해보자.</span></h1>
+  </div>
+
+  <div class="pad" data-step="1" style="justify-content:center">
+    <span class="label acc" data-step="1">THE EXPERIMENT</span>
+    <h2 class="h2 mt24" data-step="1">AI에게 하나씩 <span class="wk">큰 시련을 줘보자.</span></h2>
+
+    <div class="sym-row mt80" data-step="2" data-stagger>
+      <div class="sym">
+        <svg class="ic"><use href="#i-bolt"/></svg>
+        <span class="sym-no">01</span>
+        <h3 class="h4 mt24">상용 서비스 수준의<br><span class="acc">성능</span></h3>
+        <p class="sub mt16">Performance</p>
+      </div>
+      <div class="sym">
+        <svg class="ic"><use href="#i-layers"/></svg>
+        <span class="sym-no">02</span>
+        <h3 class="h4 mt24">상용 서비스 수준의<br><span class="acc">구조 · 로직</span></h3>
+        <p class="sub mt16">Architecture</p>
+      </div>
+      <div class="sym">
+        <svg class="ic"><use href="#i-context"/></svg>
+        <span class="sym-no">03</span>
+        <h3 class="h4 mt24">대규모 Codebase의<br><span class="acc">Context 유지</span></h3>
+        <p class="sub mt16">Context</p>
+      </div>
+      <div class="sym">
+        <svg class="ic"><use href="#i-shield"/></svg>
+        <span class="sym-no">04</span>
+        <h3 class="h4 mt24">AI가 만든 코드의<br><span class="acc">신뢰성</span></h3>
+        <p class="sub mt16">Trust</p>
+      </div>
+    </div>
+  </div>
+
+  <template class="notes"><h5>Page 3 · 직접 해보자</h5>
+  <p>고민만 해서는 답이 안 나오더라고요. 그래서 <em>모르겠으면 직접 확인해보자</em>고 생각했습니다.</p>
+  <p>대신 쉬운 걸 시키면 의미가 없습니다. <em>AI에게 하나씩 큰 시련을 줘보자</em>는 접근이었습니다.</p>
+  <ul>
+    <li>01 상용 서비스 수준의 <em>성능</em>이 나오는가</li>
+    <li>02 상용 서비스 수준의 <em>아키텍처와 로직</em>을 설계할 수 있는가</li>
+    <li>03 대규모 코드베이스에서 <em>Context를 유지</em>할 수 있는가</li>
+    <li>04 AI가 만든 코드를 <em>신뢰</em>할 수 있는가</li>
+  </ul>
+  <p>이 네 가지가 오늘 발표 전체를 관통하는 축입니다. 뒤에서 계속 다시 등장합니다.</p></template>
+</section>
+
+<!-- ============================================================
+     SLIDE 04 — 무엇을 만들까
+     ============================================================ -->
+<section class="slide" data-title="무엇을 만들까?">
+  <div class="scene center" data-out="1">
+    <h1 class="h1">그러면 <span class="wk">무엇으로</span> 테스트하지?</h1>
+  </div>
+
+  <div class="pad" data-step="1">
+    <div class="row" style="justify-content:space-between;align-items:flex-end">
+      <div>
+        <span class="label acc" data-step="1">THE TARGET</span>
+        <h2 class="h3 mt16" data-step="1">Spotfire급 <span class="mark">BI Tool</span>을 혼자 만들어보자.</h2>
+      </div>
+      <p class="sub" data-step="1">난이도를 최대로 올린 이유는 하나입니다.<br>여기서 되면, 웬만한 건 다 됩니다.</p>
+    </div>
+
+    <div class="feat-grid mt64">
+      <div class="feat" data-step="2"><i>01</i><span>대용량 데이터 로드 / 저장</span></div>
+      <div class="feat" data-step="3"><i>02</i><span>대용량 데이터 연산</span></div>
+      <div class="feat" data-step="4"><i>03</i><span>16+ Charts</span></div>
+      <div class="feat" data-step="5"><i>04</i><span>실시간 Interaction</span></div>
+      <div class="feat" data-step="6"><i>05</i><span>Dashboard UI</span></div>
+      <div class="feat" data-step="7"><i>06</i><span>Data Transformation</span></div>
+      <div class="feat" data-step="8"><i>07</i><span>사용자 Traffic</span></div>
+      <div class="feat" data-step="9"><i>08</i><span>User / Group / Folder 권한</span></div>
+      <div class="feat" data-step="10"><i>09</i><span>Data Permission</span></div>
+      <div class="feat" data-step="11"><i>10</i><span>Scale-out</span></div>
+      <div class="feat" data-step="12"><i>11</i><span>HA Architecture</span></div>
+      <div class="feat" data-step="13"><i>12</i><span>운영 안정성 · 장애 복구</span></div>
+    </div>
+  </div>
+
+  <div class="scene center veil" data-step="14" data-out="15">
+    <h1 class="h1">이걸 만들 수 있다면?</h1>
+  </div>
+  <div class="scene center veil" data-step="15">
+    <h1 class="h1">웬만한 사용자 서비스도<br><span class="acc">AI로 개발할 수 있지 않을까?</span></h1>
+  </div>
+
+  <template class="notes"><h5>Page 4 · 무엇을 만들까?</h5>
+  <p>그럼 무엇으로 테스트할까 고민하다가, <em>Spotfire급 BI Tool</em>을 혼자 만들어보기로 했습니다.</p>
+  <p>왜 하필 BI Tool이냐면, 한 제품 안에 어려운 문제가 전부 들어있기 때문입니다.</p>
+  <p><code>진행</code> 여기서는 항목을 <em>따다닥 빠르게</em> 넘기세요. 하나하나 설명하지 않습니다. “이 정도로 복잡하다”는 압도감만 주면 됩니다.</p>
+  <ul>
+    <li>대용량 데이터 로드/저장, 대용량 연산</li>
+    <li>16종 이상의 차트, 실시간 인터랙션, 대시보드 UI, 데이터 변환</li>
+    <li>사용자 트래픽, 사용자/그룹/폴더/데이터 권한</li>
+    <li>Scale-out, HA, 운영 안정성, 장애 복구</li>
+  </ul>
+  <p>그리고 이런 생각이 들었습니다. <em>이걸 만들 수 있다면, 웬만한 사용자 서비스도 AI로 개발할 수 있지 않을까?</em></p></template>
+</section>
+
+<!-- ============================================================
+     SLIDE 05 — 결과부터 말씀드리면   ★ WOW POINT
+     ============================================================ -->
+<section class="slide" data-title="결과부터 말씀드리면">
+  <div class="scene center" data-out="1">
+    <span class="label acc">RESULT FIRST</span>
+    <h1 class="display mt32">생각보다<br><span class="acc">훨씬 멀리 갔습니다.</span></h1>
+  </div>
+
+  <div class="pad" data-step="1" style="justify-content:center">
+    <div class="row" style="justify-content:space-between;align-items:baseline">
+      <div><span class="label acc">MODULO · RESULT</span></div>
+      <div class="sub">혼자, 그리고 다른 프로젝트와 <span class="ink2">병행하면서</span></div>
+    </div>
+
+    <div class="metrics mt48">
+      <div class="metric" data-step="1">
+        <div class="mv"><span class="num" data-count="50">0</span></div>
+        <div class="mk">Days</div>
+        <div class="ms">약 7주</div>
+      </div>
+      <div class="metric" data-step="2">
+        <div class="mv"><span class="num" data-count="433">0</span></div>
+        <div class="mk">Commits</div>
+        <div class="ms">하루 평균 8.6</div>
+      </div>
+      <div class="metric" data-step="3">
+        <div class="mv"><span class="num" data-count="160">0</span><em>+</em></div>
+        <div class="mk">Features</div>
+        <div class="ms">차트 · 권한 · 운영</div>
+      </div>
+      <div class="metric" data-step="4">
+        <div class="mv"><span class="num" data-count="1200">0</span><em>+</em></div>
+        <div class="mk">Test Cases</div>
+        <div class="ms">자동 검증</div>
+      </div>
+    </div>
+
+    <div class="badges mt64" data-step="5" data-stagger>
+      <span class="chip accent">Spotfire 기능 약 70%</span>
+      <span class="chip accent">Marking Speed ×50</span>
+      <span class="chip accent">Data Load / Report Open ×2.5</span>
+      <span class="chip">Scale-out · HA · Auto Recover</span>
+      <span class="chip">API · MCP · LLM</span>
+    </div>
+
+    <div class="shots mt48" id="shotstrip" data-step="6" hidden></div>
+  </div>
+
+  <div class="scene center veil" data-step="7" data-out="8">
+    <h1 class="h1">그리고 이 프로젝트만<br>개발한 것도 <span class="wk">아니었습니다.</span></h1>
+  </div>
+  <div class="scene center veil" data-step="8">
+    <div class="parallel row gap24" data-stagger>
+      <div class="pj"></div><div class="pj"></div><div class="pj"></div><div class="pj"></div><div class="pj"></div>
+    </div>
+    <h1 class="display mt48">4~5 Projects</h1>
+    <h2 class="h2 acc">in Parallel</h2>
+  </div>
+
+  <template class="notes"><h5>Page 5 · 결과부터 말씀드리면 ★</h5>
+  <p>결과부터 말씀드리면, <em>생각보다 훨씬 멀리 갔습니다.</em></p>
+  <ul>
+    <li><em>50일</em> 동안</li>
+    <li><em>433 커밋</em></li>
+    <li><em>160개 이상의 기능</em></li>
+    <li><em>1,200개 이상의 테스트 케이스</em></li>
+  </ul>
+  <p>기능 커버리지는 Spotfire 대비 약 70% 수준까지 왔고, 성능은 오히려 앞선 지점도 있습니다. Marking 속도는 약 50배, 데이터 로드와 리포트 오픈은 2.5배 정도 빨라졌습니다. Scale-out, HA, 자동 복구까지 들어가 있고 API / MCP / LLM 연동도 되어 있습니다.</p>
+  <p>그리고 중요한 건, <em>이 프로젝트만 개발한 게 아니라는 점</em>입니다. 같은 기간에 4~5개 프로젝트를 병행했습니다.</p>
+  <p><code>Tip</code> 숫자는 하나씩 천천히. 청중이 “진짜 많이 만들었네”라고 느낄 시간을 주세요.</p></template>
+</section>
+
+<!-- ============================================================
+     SLIDE 06 — 1단계 : 정말 만들 수 있을까?
+     ============================================================ -->
+<section class="slide" data-title="1단계 — 검증">
+  <div class="pad" data-out="3">
+    <span class="label acc">STEP 01 · FEASIBILITY</span>
+    <h2 class="h2 mt16">가장 어려운 것부터<br><span class="wk">먼저 검증했습니다.</span></h2>
+
+    <div class="verify-grid mt64" data-step="1" data-stagger>
+      <div class="vc">
+        <span class="ch-no">01</span>
+        <h3 class="h4 mt16">Interaction<br>Performance</h3>
+        <p class="sub mt16">Marking · Drill Down · Filtering</p>
+      </div>
+      <div class="vc">
+        <span class="ch-no">02</span>
+        <h3 class="h4 mt16">Big Data<br>Processing</h3>
+        <p class="sub mt16">Memory · Disk · Rust Core</p>
+      </div>
+      <div class="vc">
+        <span class="ch-no">03</span>
+        <h3 class="h4 mt16">Multi-user<br>Architecture</h3>
+        <p class="sub mt16">Web · Scale-out · Infrastructure</p>
+      </div>
+    </div>
+
+    <div class="chain row" data-step="2" data-stagger>
+      <span class="node sm">Challenge</span><i class="arr"></i>
+      <span class="node sm accent">ChatGPT + Claude Code</span><i class="arr"></i>
+      <span class="node sm">Idea</span><i class="arr"></i>
+      <span class="node sm">Prototype</span><i class="arr"></i>
+      <span class="node sm">Benchmark</span><i class="arr"></i>
+      <span class="node sm solid">Go / No-Go</span>
+    </div>
+  </div>
+
+  <div class="pad" data-step="3" style="justify-content:center;align-items:center;text-align:center">
+    <span class="label acc">KEY IDEAS FROM PROTOTYPE</span>
+    <div class="ideas mt48" data-step="3" data-stagger>
+      <div class="idea"><span class="i-from">Interaction</span><i class="arr"></i><span class="i-to">전용 Data Structure</span><i class="arr"></i><span class="i-res">&lt; 50ms</span></div>
+      <div class="idea"><span class="i-from">Heavy Calculation</span><i class="arr"></i><span class="i-to">Rust Core Offloading</span></div>
+      <div class="idea"><span class="i-from">Large Data</span><i class="arr"></i><span class="i-to">Memory + Disk</span></div>
+      <div class="idea"><span class="i-from">Scale</span><i class="arr"></i><span class="i-to">More Servers + Optimization</span></div>
+    </div>
+
+    <div class="mt80 row gap32" style="align-items:center">
+      <span class="stamp" data-step="4"><svg class="ic"><use href="#i-check"/></svg> Prototype 검증 완료</span>
+      <h2 class="h3 acc" data-step="5">“어… 이거 진짜 되겠는데?”</h2>
+    </div>
+  </div>
+
+  <template class="notes"><h5>Page 6 · 1단계 — 정말 만들 수 있을까?</h5>
+  <p>무작정 코딩부터 시작하지 않았습니다. <em>가장 어려운 것부터 먼저 검증</em>했습니다. 여기서 안 되면 뒤는 의미가 없으니까요.</p>
+  <ul>
+    <li><em>01 Interaction Performance</em> — Marking, Drill Down, Filtering이 실시간으로 되는가</li>
+    <li><em>02 Big Data Processing</em> — 메모리를 넘어가는 데이터를 다룰 수 있는가</li>
+    <li><em>03 Multi-user Architecture</em> — 웹에서 여러 사용자를 감당할 수 있는가</li>
+  </ul>
+  <p>방식은 단순합니다. Challenge를 ChatGPT와 Claude Code에 던지고 → 아이디어를 받고 → 프로토타입을 만들고 → 벤치마크를 돌리고 → Go / No-Go를 판단합니다.</p>
+  <p>여기서 나온 핵심 아이디어들입니다. 인터랙션은 전용 자료구조로 50ms 이내, 무거운 연산은 Rust 코어로 오프로딩, 큰 데이터는 메모리와 디스크를 같이 쓰고, 확장은 서버를 늘리는 방향으로.</p>
+  <p>프로토타입 결과를 보고 솔직히 이런 생각이 들었습니다. <em>“어… 이거 진짜 되겠는데?”</em></p></template>
+</section>
+
+<!-- ============================================================
+     SLIDE 07 — AI 개발의 본질적인 문제   ★ TURNING POINT
+     ============================================================ -->
+<section class="slide dark" data-title="AI 개발의 본질적인 문제">
+  <div class="scene center" data-out="1">
+    <h1 class="display">그런데<br><span class="acc">문제가 생겼습니다.</span></h1>
+  </div>
+
+  <div class="pad" data-step="1">
+    <div class="row" style="justify-content:space-between;align-items:baseline">
+      <span class="label acc">THE BOTTLENECK</span>
+      <span class="sub">개발이 빨라진 것이 <span class="ink2">새로운 문제를 만들었다.</span></span>
+    </div>
+
+    <div class="bottleneck mt32" data-step="1">
+      <!-- HUMAN -->
+      <div class="bn-side">
+        <div class="party">
+          <svg class="ic"><use href="#i-human"/></svg>
+          <span class="party-name">HUMAN</span>
+        </div>
+        <div class="loopchain mt24">
+          <span class="lc">Program 실행</span>
+          <span class="lc">Feature 확인</span>
+          <span class="lc">Test</span>
+          <span class="lc">Result 확인</span>
+          <span class="lc">다음 요청</span>
+        </div>
+      </div>
+
+      <!-- CHANNEL -->
+      <div class="bn-mid">
+        <div class="flowline top">
+          <span class="fl-label">Requirement · Keyboard</span>
+          <i class="arr wide"></i>
+        </div>
+
+        <div class="bars">
+          <div class="bar-row">
+            <span class="bar-name acc">AI OUTPUT</span>
+            <div class="bar hot" style="--w:100%"><span class="bar-cap">코드 · 기능 · 수정 · 리팩터링</span></div>
+          </div>
+          <div class="bar-row">
+            <span class="bar-name">HUMAN CAPACITY</span>
+            <div class="bar" style="--w:22%"></div>
+            <span class="bar-note">확인할 수 있는 양</span>
+          </div>
+        </div>
+
+        <div class="flowline bottom">
+          <i class="arr wide rev hot"></i>
+          <span class="fl-label acc">Code · Terminal · Completion</span>
+        </div>
+      </div>
+
+      <!-- AI -->
+      <div class="bn-side right">
+        <div class="party ai">
+          <svg class="ic"><use href="#i-ai"/></svg>
+          <span class="party-name">AI</span>
+        </div>
+        <div class="pile mt24">
+          <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+        </div>
+        <span class="sub" style="font-size:20px">쉬지 않고 결과를 보냄</span>
+      </div>
+    </div>
+
+    <div class="prob-row">
+      <div class="pb" data-step="2"><i>01</i><h4 class="h4">개발 확인이 병목</h4><p class="sub">만들어진 것을 켜보고 확인하는 데 시간이 더 걸린다</p></div>
+      <div class="pb" data-step="3"><i>02</i><h4 class="h4">신뢰도가 낮음</h4><p class="sub">그럴듯하게 동작하지만 틀린 코드가 섞인다</p></div>
+      <div class="pb" data-step="4"><i>03</i><h4 class="h4">사람의 이해가 병목</h4><p class="sub">변경 속도를 사람의 이해가 따라가지 못한다</p></div>
+      <div class="pb" data-step="5"><i>04</i><h4 class="h4">AI도 과거를 잊음</h4><p class="sub">이전에 내린 결정을 기억하지 못한다</p></div>
+    </div>
+  </div>
+
+  <template class="notes"><h5>Page 7 · AI 개발의 본질적인 문제 ★</h5>
+  <p>그런데 여기서 문제가 생깁니다. 성공담이 아니라 <em>속도가 만들어낸 새로운 문제</em> 이야기입니다.</p>
+  <p>구조는 단순합니다. 사람은 키보드로 요구사항을 넣고, AI는 코드와 완료 메시지를 돌려줍니다. 그런데 <em>AI가 쏟아내는 결과의 양이 사람이 확인할 수 있는 양을 압도적으로 넘어섭니다.</em></p>
+  <p>사람 쪽에는 이 루프가 계속 쌓입니다 — 프로그램 실행 → 기능 확인 → 테스트 → 결과 확인 → 다음 요청.</p>
+  <ul>
+    <li><em>01 개발 확인이 병목</em>이 됩니다.</li>
+    <li><em>02 AI 개발의 신뢰도</em>가 낮습니다. 그럴듯한데 틀린 코드가 섞입니다.</li>
+    <li><em>03 사람의 이해</em>가 병목이 됩니다.</li>
+    <li><em>04 AI도 과거의 결정을 잊습니다.</em></li>
+  </ul>
+  <p>즉, <em>개발이 빨라진 것 자체가 새로운 문제를 만들었습니다.</em> 그래서 뒤에서는 이 네 가지를 하나씩 시스템으로 해결한 이야기를 하겠습니다.</p></template>
+</section>
+
+<!-- ============================================================
+     SLIDE 08 — PROBLEM 01 → WEB
+     ============================================================ -->
+<section class="slide ps" data-title="Problem 01 → Web">
+  <div class="pad">
+    <div class="ps-head">
+      <div class="ps-p">
+        <span class="label">PROBLEM 01</span>
+        <h2 class="h3 mt16">개발 결과를 확인하는 것이<br>너무 느리다</h2>
+      </div>
+      <div class="ps-mid"><i class="arr long hot"></i></div>
+      <div class="ps-s" data-step="1">
+        <span class="label acc">SYSTEM 01</span>
+        <h2 class="h3 mt16">Everything<br>on Web</h2>
+      </div>
+    </div>
+
+    <div class="ps-body web-body" data-step="2">
+      <div class="flow-line">
+        <div class="fnode"><svg class="ic"><use href="#i-human"/></svg><span>Human</span><em>요청</em></div>
+        <i class="arr"></i>
+        <div class="fnode"><svg class="ic"><use href="#i-ai"/></svg><span>AI</span><em>개발</em></div>
+        <i class="arr"></i>
+        <div class="fnode accent"><svg class="ic"><use href="#i-gear"/></svg><span>Auto Deploy</span><em>자동 배포</em></div>
+        <i class="arr"></i>
+        <div class="fstack">
+          <div class="fnode sm"><svg class="ic"><use href="#i-browser"/></svg><span>Web</span></div>
+          <div class="fnode sm"><svg class="ic"><use href="#i-flask"/></svg><span>Test Result</span></div>
+          <div class="fnode sm"><svg class="ic"><use href="#i-bell"/></svg><span>Notification</span></div>
+        </div>
+        <i class="arr"></i>
+        <div class="devices">
+          <div class="dev"><svg class="ic"><use href="#i-phone"/></svg></div>
+          <div class="dev"><svg class="ic"><use href="#i-monitor"/></svg></div>
+          <span class="dev-cap">Anywhere / Anytime</span>
+        </div>
+      </div>
+      <div class="loop-wrap">
+        <svg class="loopback" viewBox="0 0 1696 118" width="1696" height="118">
+          <path d="M1218 0 V74 Q1218 92 1200 92 H106 Q88 92 88 74 V12"/>
+          <path class="head" d="M81 16 L88 0 L95 16 Z"/>
+        </svg>
+        <span class="loopback-label">확인 → 바로 다음 요청</span>
+      </div>
+    </div>
+
+    <div class="ps-foot" data-step="3">
+      <h2 class="h3">요청 <span class="wk">→</span> 완료 <span class="wk">→</span> <span class="acc">바로 확인</span></h2>
+      <p class="sub">이동 중에도, 회의 사이에도 — 확인은 링크 하나로 끝난다</p>
+    </div>
+  </div>
+
+  <template class="notes"><h5>Page 8 · Problem 01 → Web</h5>
+  <p>첫 번째 문제는 <em>개발 결과를 확인하는 것이 너무 느리다</em>는 것이었습니다. AI는 5분 만에 만들어놓는데, 저는 그걸 확인하려고 로컬에서 빌드하고 실행하고 클릭하고 있었습니다.</p>
+  <p>그래서 <em>모든 것을 웹에 올렸습니다.</em> AI가 개발을 끝내면 자동으로 배포되고, 웹 화면과 테스트 결과가 갱신되고, 알림이 옵니다.</p>
+  <p>그 결과 <em>요청 → 완료 → 바로 확인</em>이 하나의 흐름이 됐습니다. 폰으로도 확인이 되니까 이동 중에도 다음 요청을 보낼 수 있습니다.</p>
+  <p>별것 아닌 것 같지만, 확인 시간이 줄어드는 만큼 전체 개발 사이클이 통째로 빨라집니다.</p></template>
+</section>
+
+<!-- ============================================================
+     SLIDE 09 — PROBLEM 02 → TEST   ★ CORE PHILOSOPHY
+     ============================================================ -->
+<section class="slide ps" data-title="Problem 02 → Test">
+  <div class="pad">
+    <div class="ps-head">
+      <div class="ps-p">
+        <span class="label">PROBLEM 02</span>
+        <h2 class="h3 mt16">AI가 만든 코드를<br>믿을 수 없다</h2>
+      </div>
+      <div class="ps-mid"><i class="arr long hot"></i></div>
+      <div class="ps-s" data-step="1">
+        <span class="label acc">SYSTEM 02</span>
+        <h2 class="h3 mt16">Test<br>Everything</h2>
+      </div>
+    </div>
+
+    <div class="ps-body test-body" data-step="2">
+      <div class="fnode lg accent"><svg class="ic"><use href="#i-branch"/></svg><span>Feature</span></div>
+
+      <svg class="conn" viewBox="0 0 130 376" width="130" height="376">
+        <path d="M0 188 C70 188 60 38 126 38"/><path d="M0 188 C70 188 60 138 126 138"/>
+        <path d="M0 188 C70 188 60 238 126 238"/><path d="M0 188 C70 188 60 338 126 338"/>
+        <path class="head" d="M120 33 130 38 120 43z"/><path class="head" d="M120 133 130 138 120 143z"/>
+        <path class="head" d="M120 233 130 238 120 243z"/><path class="head" d="M120 333 130 338 120 343z"/>
+      </svg>
+
+      <div class="tcol">
+        <div class="fnode t-ok"><svg class="ic"><use href="#i-check"/></svg><span>Green Test</span><em>정상 동작</em></div>
+        <div class="fnode t-no"><svg class="ic"><use href="#i-x"/></svg><span>Red Test</span><em>실패해야 할 것</em></div>
+        <div class="fnode"><svg class="ic"><use href="#i-shield"/></svg><span>Edge / Adversarial</span><em>공격적 입력</em></div>
+        <div class="fnode"><svg class="ic"><use href="#i-cursor"/></svg><span>UI Test</span><em>Playwright</em></div>
+      </div>
+
+      <svg class="conn" viewBox="0 0 130 376" width="130" height="376">
+        <path d="M4 38 C70 38 62 74 124 74"/><path d="M4 138 C70 138 62 74 124 74"/>
+        <path d="M4 238 C70 238 62 74 124 74"/><path d="M4 338 C70 338 62 74 124 74"/>
+        <path class="head" d="M118 69 128 74 118 79z"/>
+      </svg>
+
+      <div class="rcol" style="align-self:flex-start;margin-top:36px">
+        <div class="fnode"><svg class="ic"><use href="#i-flask"/></svg><span>Regression Suite</span><em>매 커밋</em></div>
+        <i class="arr-v"></i>
+        <div class="fnode"><svg class="ic"><use href="#i-clock"/></svg><span>Daily E2E</span><em>매일 03:00</em></div>
+        <i class="arr-v"></i>
+        <div class="fnode"><svg class="ic"><use href="#i-bell"/></svg><span>Result Report</span><em>아침에 확인</em></div>
+      </div>
+
+      <div class="bignum">
+        <div class="bn-v"><span class="num" data-count="1200">0</span><em>+</em></div>
+        <div class="bn-k">Tests</div>
+        <div class="bn-s">사람이 아니라<br>시스템이 검사한다</div>
+      </div>
+    </div>
+
+    <div class="ps-foot big" data-step="3">
+      <h2 class="h2">AI가 틀려도 <span class="acc">그냥 통과하지 못하게</span> 한다.</h2>
+      <p class="lead mt16">AI의 정확성을 AI에게만 맡기지 않는다.</p>
+    </div>
+  </div>
+
+  <template class="notes"><h5>Page 9 · Problem 02 → Test ★</h5>
+  <p>두 번째 문제는 신뢰입니다. <em>AI가 만든 코드를 믿을 수 없다.</em> 그럴듯하게 잘 만든 것 같은데, 어딘가 조용히 틀려 있습니다.</p>
+  <p>그래서 접근을 바꿨습니다. AI를 더 똑똑하게 만들려고 하는 대신, <em>틀려도 통과하지 못하는 구조</em>를 만들었습니다.</p>
+  <p>기능이 하나 생기면 반드시 같이 생기는 것들이 있습니다.</p>
+  <ul>
+    <li><em>Green Test</em> — 정상적으로 동작하는가</li>
+    <li><em>Red Test</em> — 실패해야 하는 상황에서 제대로 실패하는가</li>
+    <li><em>Edge / Adversarial Test</em> — 이상한 입력에도 버티는가</li>
+    <li><em>UI Test</em> — Playwright로 실제 브라우저에서 클릭까지 검증</li>
+  </ul>
+  <p>이게 모여서 회귀 테스트 스위트가 되고, 매일 새벽 3시에 E2E가 돌고, 아침에 결과 리포트를 확인합니다. 지금 1,200개가 넘습니다.</p>
+  <p>핵심은 이 한 문장입니다. <em>AI의 정확성을 AI에게만 맡기지 않는다.</em></p></template>
+</section>
+
+<!-- ============================================================
+     SLIDE 10 — PROBLEM 03 → DOCUMENTATION
+     ============================================================ -->
+<section class="slide ps" data-title="Problem 03 → Documentation">
+  <div class="pad">
+    <div class="ps-head">
+      <div class="ps-p">
+        <span class="label">PROBLEM 03</span>
+        <h2 class="h3 mt16">사람의 이해 속도가<br>따라가지 못한다</h2>
+      </div>
+      <div class="ps-mid"><i class="arr long hot"></i></div>
+      <div class="ps-s" data-step="1">
+        <span class="label acc">SYSTEM 03</span>
+        <h2 class="h3 mt16">Documentation<br>for Human</h2>
+      </div>
+    </div>
+
+    <div class="ps-body doc-body" data-step="2">
+      <div class="doc-flow">
+        <div class="fnode"><svg class="ic"><use href="#i-ai"/></svg><span>AI Development</span></div>
+        <i class="arr-v"></i>
+        <div class="doc-kinds">
+          <span class="chip">Architecture</span><span class="chip">Logic</span>
+          <span class="chip">Decision</span><span class="chip">Diagram</span><span class="chip">Release</span>
+        </div>
+        <i class="arr-v"></i>
+        <div class="fnode accent"><svg class="ic"><use href="#i-doc"/></svg><span>/doc</span></div>
+        <i class="arr-v"></i>
+        <div class="fnode solid"><svg class="ic"><use href="#i-human"/></svg><span>Human</span></div>
+      </div>
+
+      <div class="win">
+        <div class="win-bar"><i></i><i></i><i></i><span class="win-url">/doc / architecture</span></div>
+        <div class="win-body">
+          <nav class="win-side">
+            <span>About</span><span class="on">Architecture</span><span>Releases</span><span>Decisions</span>
+          </nav>
+          <div class="win-main">
+            <div class="win-h"></div>
+            <div class="mini-arch">
+              <div class="ma">Web</div><i class="arr"></i>
+              <div class="ma">API</div><i class="arr"></i>
+              <div class="ma acc">Rust Core</div><i class="arr"></i>
+              <div class="ma">Storage</div>
+            </div>
+            <div class="win-lines"><i></i><i></i><i style="width:62%"></i></div>
+            <div class="win-h" style="margin-top:36px;font-size:26px">Decision · 왜 이렇게 만들었는가</div>
+            <div class="win-lines" style="margin-top:20px"><i></i><i style="width:78%"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ps-foot" data-step="3">
+      <h2 class="h3">코드를 모두 읽는 대신 <span class="acc">시스템의 Logic을 이해한다.</span></h2>
+      <p class="sub">몇 주 뒤에도 다시 이해할 수 있게</p>
+    </div>
+  </div>
+
+  <template class="notes"><h5>Page 10 · Problem 03 → Documentation</h5>
+  <p>세 번째 문제. 개발은 빨라졌는데 <em>사람의 이해 속도가 따라가지 못합니다.</em> 하루에 수십 개씩 바뀌는 코드를 전부 읽는 건 불가능합니다.</p>
+  <p>그래서 AI가 개발을 하면 <em>사람이 읽을 문서</em>도 같이 만들게 했습니다. 아키텍처, 로직, 결정 사항, 다이어그램, 릴리스 노트가 <code>/doc</code>에 계속 쌓입니다.</p>
+  <p>이제 저는 코드를 전부 읽지 않습니다. <em>시스템의 로직을 이해</em>합니다. 그리고 중요한 건, 몇 주 뒤에 다시 봐도 이해할 수 있다는 점입니다.</p>
+  <p>이 문서는 사람만 보는 게 아니라 AI도 다시 읽습니다. 그래서 다음 페이지로 이어집니다.</p></template>
+</section>
+
+<!-- ============================================================
+     SLIDE 11 — PROBLEM 04 → DECISIONS
+     ============================================================ -->
+<section class="slide ps" data-title="Problem 04 → Decisions">
+  <div class="pad">
+    <div class="ps-head">
+      <div class="ps-p">
+        <span class="label">PROBLEM 04</span>
+        <h2 class="h3 mt16">AI도 과거의<br>의사결정을 잊는다</h2>
+      </div>
+      <div class="ps-mid"><i class="arr long hot"></i></div>
+      <div class="ps-s" data-step="1">
+        <span class="label acc">SYSTEM 04</span>
+        <h2 class="h3 mt16">Make Decisions<br>Persistent</h2>
+      </div>
+    </div>
+
+    <div class="ps-body dec-body" data-step="2">
+      <div class="dec-chain">
+        <div class="fnode"><span>New Task</span></div><i class="arr"></i>
+        <div class="fnode accent tap read"><svg class="ic"><use href="#i-search"/></svg><span>Decisions 검색</span><em class="tap-cap">개발 전에 <b>읽는다</b></em></div><i class="arr"></i>
+        <div class="fnode"><span>Architecture / Rules 확인</span></div><i class="arr"></i>
+        <div class="fnode"><span>Development</span></div><i class="arr"></i>
+        <div class="fnode accent tap write"><svg class="ic"><use href="#i-doc"/></svg><span>New Decision 기록</span><em class="tap-cap" style="left:auto;right:calc(50% + 20px)">개발 후에 <b>남긴다</b></em></div>
+      </div>
+
+      <div class="store">
+        <svg class="ic"><use href="#i-db"/></svg>
+        <div class="store-t"><b>DECISIONS</b><span>Architecture · Rules · Trade-off · 금지 사항</span></div>
+        <div class="store-tags">
+          <span class="chip plain">왜 Rust Core인가</span>
+          <span class="chip plain">권한 모델 규칙</span>
+          <span class="chip plain">Chart 렌더링 방식</span>
+          <span class="chip plain">하지 말아야 할 것</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ps-foot" data-step="3">
+      <h2 class="h3">AI의 기억력을 믿지 않는다.</h2>
+      <h2 class="h3 acc mt16" data-step="4">Project가 기억하게 만든다.</h2>
+    </div>
+  </div>
+
+  <template class="notes"><h5>Page 11 · Problem 04 → Decisions</h5>
+  <p>네 번째 문제는 기억입니다. <em>AI도 과거의 의사결정을 잊습니다.</em> 지난주에 “이건 이렇게 가기로 했다”고 정해놓은 걸, 새 세션에서는 아무렇지 않게 다르게 만듭니다.</p>
+  <p>그래서 의사결정을 프로젝트 안에 남기게 했습니다. 새 작업이 들어오면 <em>먼저 관련된 Decisions를 검색</em>하고, 이전 아키텍처와 규칙을 확인한 다음에 개발을 시작합니다. 끝나면 새로 내린 결정을 다시 기록합니다.</p>
+  <p>여기에는 “왜 Rust 코어를 썼는지”, “권한 모델 규칙”, “차트 렌더링 방식”, 그리고 <em>하지 말아야 할 것</em>들이 들어 있습니다.</p>
+  <p>결론은 이겁니다. <em>AI의 기억력을 믿지 않는다. 대신 프로젝트가 기억하게 만든다.</em></p></template>
+</section>
+
+<!-- ============================================================
+     SLIDE 12 — 최종 구조   ★ CORE ARCHITECTURE
+     ============================================================ -->
+<section class="slide" data-title="최종 구조">
+  <div class="scene center" id="s12a" data-out="1">
+    <span class="label">지금까지의 구조</span>
+    <div class="simple mt48">
+      <span class="node lg"><svg class="ic"><use href="#i-human"/></svg>Human</span>
+      <i class="arr-v"></i>
+      <span class="node lg"><svg class="ic"><use href="#i-ai"/></svg>AI</span>
+      <i class="arr-v"></i>
+      <span class="node lg">Code</span>
+    </div>
+  </div>
+
+  <div class="pad" data-step="1" style="justify-content:center">
+    <div class="row" style="justify-content:space-between;align-items:flex-start">
+      <div>
+        <span class="label acc">FINAL SETUP</span>
+        <h2 class="h3 mt16">Human <span class="wk">↔</span> Development System <span class="wk">↔</span> AI</h2>
+      </div>
+      <div class="before-mini">
+        <span class="label">BEFORE</span>
+        <div class="row gap12 mt16">
+          <span class="chip plain">Human</span><i class="arr" style="width:26px"></i>
+          <span class="chip plain">AI</span><i class="arr" style="width:26px"></i>
+          <span class="chip plain">Code</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="arch mt48">
+      <div class="band human" data-step="1">
+        <div class="band-h"><svg class="ic"><use href="#i-human"/></svg><div class="band-t"><b>HUMAN</b><span>보고 판단한다</span></div></div>
+        <div class="band-c">
+          <span class="chip">Web Result</span><span class="chip">Test Result</span><span class="chip">Documentation</span>
+          <span class="chip">Architecture</span><span class="chip">Releases</span>
+        </div>
+      </div>
+
+      <div class="band-link" data-step="2"><i class="arr-v both"></i></div>
+
+      <div class="band system" data-step="2">
+        <div class="band-h"><svg class="ic"><use href="#i-gear"/></svg><div class="band-t"><b>DEVELOPMENT SYSTEM</b><span>둘 사이를 지탱한다</span></div></div>
+        <div class="band-c wrap">
+          <span class="chip accent">Context</span><span class="chip accent">Decisions</span><span class="chip accent">Rules</span><span class="chip accent">Tests</span>
+          <span class="chip accent">Workflow</span><span class="chip accent">Documentation</span><span class="chip accent">Benchmark</span><span class="chip accent">Monitoring</span>
+        </div>
+      </div>
+
+      <div class="band-link" data-step="3"><i class="arr-v both"></i></div>
+
+      <div class="band ai" data-step="3">
+        <div class="band-h"><svg class="ic"><use href="#i-ai"/></svg><div class="band-t"><b>AI</b><span>만든다</span></div></div>
+        <div class="band-c">
+          <span class="chip">Implementation</span><span class="chip">Test</span><span class="chip">Refactor</span>
+          <span class="chip">Documentation</span><span class="chip">Debugging</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="lead mt32" data-step="4" style="text-align:center">사람은 <span class="ink2">시스템을 통해</span> AI를 본다. AI는 <span class="ink2">시스템을 통해</span> 과거를 본다.</p>
+  </div>
+
+  <template class="notes"><h5>Page 12 · 최종 구조 ★</h5>
+  <p>처음의 구조는 아주 단순했습니다. <em>사람 → AI → 코드.</em> 그런데 앞에서 본 네 가지 문제를 하나씩 해결하다 보니, 사이에 층이 하나 생겼습니다.</p>
+  <p>지금은 이렇게 되어 있습니다.</p>
+  <ul>
+    <li><em>HUMAN</em> — 코드가 아니라 웹 결과, 테스트 결과, 문서, 아키텍처, 릴리스를 봅니다.</li>
+    <li><em>DEVELOPMENT SYSTEM</em> — Context, Decisions, Rules, Tests, Workflow, Documentation, Benchmark, Monitoring. 이게 오늘 발표의 핵심입니다.</li>
+    <li><em>AI</em> — 구현, 테스트, 리팩터링, 문서화, 디버깅을 합니다.</li>
+  </ul>
+  <p>중요한 건 <em>사람이 AI를 직접 보지 않는다</em>는 겁니다. 시스템을 통해 봅니다. AI도 마찬가지로 시스템을 통해 과거의 결정을 봅니다.</p>
+  <p><code>Tip</code> 이 그림 하나로 2~3분 설명해도 됩니다. 각 층을 손으로 짚어가며 천천히.</p></template>
+</section>
+
+<!-- ============================================================
+     SLIDE 13 — 이 방식의 강력함
+     ============================================================ -->
+<section class="slide" data-title="이 방식의 강력함">
+  <div class="pad">
+    <span class="label acc">WHY IT MATTERS</span>
+    <h2 class="h2 mt16">개발 속도가 빨라질수록<br><span class="acc">시스템의 가치도 커집니다.</span></h2>
+
+    <div class="speed mt64" data-step="1">
+      <div class="sp-group">
+        <div class="sp-bars">
+          <div class="sp-bar" style="--h:46px"><span class="sp-v">1</span></div>
+        </div>
+        <div class="sp-name">기존 개발</div>
+        <div class="sp-note">1 Feature / Day</div>
+      </div>
+
+      <div class="sp-div"></div>
+
+      <div class="sp-group wide">
+        <div class="sp-bars">
+          <div class="sp-bar hot" style="--h:112px" data-step="1"><span class="sp-v">10+</span></div>
+          <div class="sp-bar hot" style="--h:186px" data-step="1"><span class="sp-v">20+</span></div>
+          <div class="sp-bar hot" style="--h:270px" data-step="1"><span class="sp-v">40+</span></div>
+        </div>
+        <div class="sp-name">AI Development</div>
+        <div class="sp-note">Changes / Day</div>
+      </div>
+
+      <div class="cap-line" data-step="2">
+        <span class="cap-tag">HUMAN CAPACITY — 그대로</span>
+      </div>
+    </div>
+
+    <div class="absorb mt48" data-step="3">
+      <span class="label">AUTOMATION이 흡수한다</span>
+      <div class="row gap16 mt16" data-stagger>
+        <span class="chip accent">Testing</span><span class="chip accent">Documentation</span>
+        <span class="chip accent">State</span><span class="chip accent">Regression</span>
+        <span class="chip accent">Benchmark</span><span class="chip accent">Monitoring</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="scene center veil" data-step="4">
+    <h2 class="h2 faded"><s>“어떻게 구현하지?”</s></h2>
+    <h1 class="display mt48">무엇을 해결하지?<br><span class="acc">무엇을 만들지?</span></h1>
+    <p class="lead mt48">생각의 속도를 개발 속도로 바꾼다.</p>
+  </div>
+
+  <template class="notes"><h5>Page 13 · 이 방식의 강력함</h5>
+  <p>왜 이 구조가 특히 지금 중요한가를 말씀드리고 싶습니다.</p>
+  <p>기존에는 하루에 기능 하나 정도였습니다. 지금은 하루에 10개, 20개, 40개씩 바뀝니다. 그런데 <em>사람의 확인 능력은 그대로</em>입니다.</p>
+  <p>이 격차를 사람이 메우려고 하면 무너집니다. 그래서 그 사이를 <em>자동화가 흡수</em>하게 만든 겁니다 — 테스트, 문서화, 상태 관리, 회귀 검증, 벤치마크, 모니터링.</p>
+  <p>그러면 개발자가 쓰는 시간의 성격이 바뀝니다. <em>“어떻게 구현하지?”</em>를 고민하던 시간이 줄고, <em>“무엇을 해결하지? 무엇을 만들지?”</em>가 남습니다.</p>
+  <p>결국 <em>생각의 속도를 개발 속도로 바꾸는 것</em>입니다.</p></template>
+</section>
+
+<!-- ============================================================
+     SLIDE 14 — 정리하며
+     ============================================================ -->
+<section class="slide" data-title="정리하며">
+  <div class="pad" style="justify-content:center">
+    <span class="label acc">SUMMARY</span>
+    <div class="sum mt48">
+      <div class="sm-item" data-step="1">
+        <span class="sm-no">01</span>
+        <h2 class="h3">개인도 상당히 큰 서비스를<br>AI와 개발할 수 있다.</h2>
+      </div>
+      <div class="sm-item" data-step="2">
+        <span class="sm-no">02</span>
+        <div>
+          <h2 class="h3">AI에게 맡기기만 해서는<br><span class="wk">부족하다.</span></h2>
+          <div class="row gap12 mt24">
+            <span class="chip plain">Test</span><span class="chip plain">Doc</span>
+            <span class="chip plain">Rule</span><span class="chip plain">Workflow</span><span class="chip plain">Monitor</span>
+          </div>
+        </div>
+      </div>
+      <div class="sm-item" data-step="3">
+        <span class="sm-no">03</span>
+        <h2 class="h3">개발이 빨라질수록<br><span class="acc">시스템의 가치는 커진다.</span></h2>
+      </div>
+    </div>
+
+    <div class="mt48" data-step="4">
+      <p class="quote">AI의 부족함을 시스템으로 보완하면<br>AI와 개발 가능한 서비스의 크기도 커진다.</p>
+    </div>
+  </div>
+
+  <template class="notes"><h5>Page 14 · 정리하며</h5>
+  <p>오늘 이야기를 세 가지로 정리하겠습니다.</p>
+  <ul>
+    <li><em>01</em> 개인도 상당히 큰 서비스를 AI와 함께 개발할 수 있습니다. 50일 만에 상용 BI 툴의 70% 수준까지 갔습니다.</li>
+    <li><em>02</em> 다만 AI에게 맡기기만 해서는 부족합니다. 테스트, 문서, 규칙, 워크플로, 모니터링이 같이 있어야 합니다.</li>
+    <li><em>03</em> 그리고 개발이 빨라질수록 이 시스템의 가치는 더 커집니다.</li>
+  </ul>
+  <p>한 문장으로 하면 이렇습니다. <em>AI의 부족함을 시스템으로 보완하면, AI와 개발 가능한 서비스의 크기도 커진다.</em></p></template>
+</section>
+
+<!-- ============================================================
+     SLIDE 15 — 다시 처음 질문   ★ CONCLUSION
+     ============================================================ -->
+<section class="slide" data-title="다시 처음 질문" data-dark-at="5">
+  <div class="scene center" data-out="1"><h1 class="display">그래서,</h1></div>
+
+  <div class="scene center" data-step="1" data-out="2">
+    <h1 class="display">AI가 개발자를<br>대체할 수 있을까요?</h1>
+  </div>
+
+  <div class="scene" data-step="2" data-out="4" style="justify-content:center">
+    <h2 class="h2">아직은 <span class="wk">어렵다고 생각합니다.</span></h2>
+    <div class="meters mt64" data-step="2">
+      <div class="mt-row">
+        <span class="mt-name">Implementation Speed</span>
+        <div class="cells"><div class="cells-fill" style="width:634px"></div></div>
+        <span class="mt-val acc">수십 명 몫</span>
+      </div>
+      <div class="mt-row">
+        <span class="mt-name">Decision Quality</span>
+        <div class="cells"><div class="cells-fill" style="width:250px"></div></div>
+        <span class="mt-val">가끔 이상한 선택</span>
+      </div>
+    </div>
+    <p class="quote mt64" data-step="3">개발 속도는 수십 명이 붙은 것처럼 빨라져도,<br>중요한 의사결정은 여전히 이상한 선택을 한다.</p>
+  </div>
+
+  <div class="scene center" data-step="4" data-out="5">
+    <h1 class="h1">그래서 개발자는<br><span class="acc">아직 필요합니다.</span></h1>
+  </div>
+
+  <div class="scene center" data-step="5" data-out="6">
+    <h1 class="h1">그렇다고<br>안심할 수도 <span class="acc">없습니다.</span></h1>
+  </div>
+
+  <div class="scene center" data-step="6" data-out="7">
+    <h1 class="h2" style="max-width:1560px">AI를 잘 사용하는 개발자와<br>그렇지 않은 개발자의 격차는<br><span class="acc">점점 커질 것입니다.</span></h1>
+  </div>
+
+  <div class="scene center" data-step="7">
+    <span class="label acc">THE REAL BOTTLENECK</span>
+    <h1 class="display mt32" style="max-width:1560px">결국 병목은<br><span class="acc">인간의 생각과 판단</span><br>속도가 됩니다.</h1>
+  </div>
+
+  <template class="notes"><h5>Page 15 · 다시 처음 질문 ★</h5>
+  <p>그래서 처음 질문으로 돌아가겠습니다. <em>AI가 개발자를 대체할 수 있을까요?</em></p>
+  <p><code>Tip</code> 여기서 3~4초 정도 그냥 두세요. 청중이 각자 생각하게.</p>
+  <p>제 생각은 <em>아직은 어렵다</em>입니다. 구현 속도는 정말 수십 명이 붙은 것처럼 빨라졌습니다. 그런데 <em>중요한 의사결정에서는 여전히 이상한 선택</em>을 합니다. 그리고 그 판단이 틀렸을 때 책임지고 방향을 바꾸는 건 결국 사람입니다.</p>
+  <p>그래서 개발자는 아직 필요합니다. <em>그렇다고 안심할 수도 없습니다.</em></p>
+  <p><em>AI를 잘 사용하는 개발자와 그렇지 않은 개발자의 격차는 점점 커질 겁니다.</em></p>
+  <p>마지막으로 이 말씀을 드리고 싶습니다. 개발이 극도로 빨라지면, <em>결국 병목은 인간의 생각과 판단 속도</em>가 됩니다.</p></template>
+</section>
+
+<!-- ============================================================
+     SLIDE 16 — Q&A
+     ============================================================ -->
+<section class="slide" data-title="Q&amp;A">
+  <div class="scene center">
+    <p class="ghost-q">AI가 개발자를 대체할 수 있을까요?</p>
+    <h1 class="display">Q&amp;A</h1>
+    <p class="lead mt48">들어주셔서 감사합니다.</p>
+  </div>
+  <template class="notes"><h5>Page 16 · Q&amp;A</h5>
+  <p>들어주셔서 감사합니다. 질문 받겠습니다.</p>
+  <p><code>예상 질문</code></p>
+  <ul>
+    <li>비용은 얼마나 드나요? / 어떤 모델을 쓰나요?</li>
+    <li>테스트도 AI가 만들면 같이 틀리는 것 아닌가요? → Red/Adversarial 테스트와 벤치마크, 그리고 사람이 정의한 규칙이 그 지점을 막습니다.</li>
+    <li>실무 코드베이스에도 적용 가능한가요? → 문서·결정·테스트부터 먼저 만드시는 걸 권합니다.</li>
+    <li>개발 실력이 퇴화하지 않나요? → 판단과 설계 비중이 오히려 늘었습니다.</li>
+  </ul></template>
+</section>
+
+</div><!-- /#stage -->
+
+<div id="progress"></div>
+<div id="pager"><span class="cur">01</span> / 16</div>
+<div id="brandmark">AI × Development System</div>
+</div><!-- /#deck -->
+
+<aside id="notes">
+  <div class="nhead"><span>Speaker Note</span><b id="nPage">01 / 16</b></div>
+  <div class="nbody" id="nBody"></div>
+  <div class="nfoot">N 노트 · ? 도움말 · F 전체화면</div>
+</aside>
+
+<div id="help"><div class="box">
+  <div><b>→ / Space</b> 다음 단계 · 다음 페이지</div>
+  <div><b>←</b> 이전 단계 · 이전 페이지</div>
+  <div><b>↓ / ↑</b> 페이지 단위 이동</div>
+  <div><b>Home / End</b> 처음 / 마지막 페이지</div>
+  <div><b>F</b> 전체화면</div>
+  <div><b>N</b> Speaker Note</div>
+  <div><b>?</b> 이 도움말</div>
+</div></div>
+
+<script src="script.js"></script>
+</body>
+</html>
