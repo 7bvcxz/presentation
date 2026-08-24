@@ -70,11 +70,11 @@ Page 5 하단에 자동으로 스트립이 생깁니다. 파일이 없으면 그
 | 09 | **Problem 02 → Test Everything** | 3 |
 | 10 | Problem 03 → Documentation for Human | 3 |
 | 11 | Problem 04 → Make Decisions Persistent | 4 |
-| 12 | **최종 구조** — Human ↔ Development System ↔ AI | 4 |
+| 12 | **최종 구조** — 지금까지의 구조 vs 새로운 구조 비교 → 3층 아키텍처 | 4 |
 | 13 | 이 방식의 강력함 | 4 |
 | 14 | 정리하며 | 4 |
 | 15 | **다시 처음 질문** — 결론 (후반 dark 전환) | 7 |
-| 16 | Q&A | 0 |
+| 16 | **마무리 메시지** — 생각의 속도가 개발의 속도 → Q&A | 3 |
 
 **굵은 페이지**는 연출 비중이 큰 지점입니다. Page 4는 빠르게 연타, Page 15는 각 단계마다 충분히 쉬어가세요.
 

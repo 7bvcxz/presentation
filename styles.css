@@ -606,6 +606,76 @@ body {
 .band-link { display: flex; justify-content: center; }
 .band-link .arr-v { height: 46px; }
 
+/* ---- S12 : before / after 비교 다이어그램 ---- */
+.arch2 { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+.apanel {
+  border: 1.5px solid var(--line-strong); border-radius: 22px;
+  padding: 22px 22px 18px; display: flex; flex-direction: column; background: var(--bg);
+}
+.apanel.new { border-color: var(--accent); border-width: 2px; }
+.apanel-h { display: flex; align-items: baseline; gap: 16px; }
+.apanel-h span { font-family: var(--mono); font-size: 17px; letter-spacing: .16em; color: var(--muted); }
+.apanel-h b { font-size: 30px; font-weight: 750; letter-spacing: -.025em; }
+.apanel.new .apanel-h span { color: var(--accent); }
+
+.acanvas { position: relative; width: 768px; height: 500px; margin-top: 6px; }
+.acanvas .wires { position: absolute; left: 0; top: 0; }
+.acanvas .wires path { fill: none; stroke: var(--line-strong); stroke-width: 2; }
+.acanvas .wires .head { fill: var(--line-strong); stroke: none; }
+.acanvas .wires .auto { stroke: var(--accent); }
+.acanvas .wires .head.auto { fill: var(--accent); stroke: none; }
+.acanvas .wires .ret { stroke-dasharray: 7 6; opacity: .8; }
+
+.acanvas .v, .acanvas .vc {
+  position: absolute; font-size: 18px; color: var(--muted); white-space: nowrap; letter-spacing: -.01em;
+  background: var(--bg); padding: 2px 10px;
+}
+.acanvas .v  { transform: translate(-100%, -50%); }
+.acanvas .vc { transform: translate(-50%, -50%); }
+.acanvas .vc.acc { color: var(--accent); font-weight: 600; }
+
+.acanvas .arow, .acanvas > .n { position: absolute; transform: translateY(-50%); }
+.acanvas .arow { display: flex; align-items: center; }
+.acanvas .n {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  border: 1.5px solid var(--line-strong); border-radius: 12px; background: var(--surface);
+  padding: 11px 14px; min-height: 58px; text-align: center;
+}
+.acanvas .n b { font-size: 22px; font-weight: 650; letter-spacing: -.02em; white-space: nowrap; }
+.acanvas .n em {
+  font-style: normal; font-size: 17px; color: var(--muted); margin-top: 5px;
+  display: inline-flex; align-items: center; gap: 7px; white-space: nowrap;
+}
+.acanvas .n em .ic { width: 17px; height: 17px; flex: none; }
+
+.acanvas .hub {
+  flex-direction: row; gap: 14px; height: 92px; padding: 0 22px;
+  border-width: 2px; border-color: var(--ink); background: var(--surface);
+}
+.acanvas .hub.sm { height: 60px; }
+.acanvas .hub .ic { width: 34px; height: 34px; flex: none; color: var(--ink); }
+.acanvas .hub b { font-family: var(--mono); font-size: 21px; letter-spacing: .1em; font-weight: 600; }
+.acanvas .hub.fin { border-color: var(--accent); background: var(--accent-soft); }
+.acanvas .hub.fin .ic { color: var(--accent); stroke-width: 2.6; }
+.acanvas .hub.fin b { color: var(--accent); }
+
+.apanel-f {
+  margin-top: auto; border-top: 1px solid var(--line); padding-top: 16px;
+  font-size: 20px; color: var(--muted); letter-spacing: -.01em;
+}
+.apanel-f b { color: var(--ink); font-weight: 700; }
+.apanel.new .apanel-f b { color: var(--accent); }
+
+/* ---- S15 : 결론 하단 근거 ---- */
+.why { display: flex; gap: 88px; }
+.wy { border-top: 2px solid var(--line-strong); padding-top: 20px; text-align: left; min-width: 440px; }
+.wy i {
+  font-family: var(--mono); font-style: normal; font-size: 19px; letter-spacing: .14em;
+  color: var(--accent); display: block; margin-bottom: 12px;
+}
+.wy b { display: block; font-size: 30px; font-weight: 700; letter-spacing: -.025em; }
+.wy span { display: block; font-size: 20px; color: var(--muted); margin-top: 8px; }
+
 /* ---- S13 : speed ---- */
 .speed { position: relative; display: grid; grid-template-columns: 320px 2px 1fr; gap: 72px; }
 .sp-div { background: var(--line); }
