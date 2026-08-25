@@ -32,7 +32,7 @@ python3 -m http.server 8080   →  http://localhost:8080
 ## 구조
 
 ```
-index.html    16개 Slide + Speaker Note(<template class="notes">) + 아이콘 스프라이트
+index.html    18개 Slide + Speaker Note(<template class="notes">) + 아이콘 스프라이트
 styles.css    디자인 토큰 → 타이포 → 프리미티브(node/chip/arrow) → 슬라이드 컴포넌트
 script.js     Stage 스케일링 · 단계 Reveal 엔진 · 내비게이션 · 카운트업 · 노트
 assets/       (선택) modulo-1..4.png
@@ -51,7 +51,7 @@ Page 5 하단에 자동으로 스트립이 생깁니다. 파일이 없으면 그
 
 - Accent: `#FF4D00` — 발표 전체에서 이 색 하나만 강조용으로 사용
 - Ink `#0B0B0C` / BG `#FBFBFA` / Line `#E2E2DF`
-- Dark Slide: Page 2(회의감), Page 7(문제 발생), Page 15 후반(결론) — 감정선 전환 지점에만 사용
+- Dark Slide: Page 2(회의감), Page 8(문제 발생), Page 16 후반(결론) — 감정선 전환 지점에만 사용
 - 다이어그램은 전부 직접 제작한 HTML/CSS/SVG (외부 이미지 없음)
 - 색/간격/모서리 값을 바꾸려면 `styles.css` 상단 `:root` 토큰만 수정하면 전체에 반영됩니다.
 
@@ -63,20 +63,22 @@ Page 5 하단에 자동으로 스트립이 생깁니다. 파일이 없으면 그
 | 02 | AI 개발 Challenge (dark) | 4 |
 | 03 | 직접 해보자 — 4개 시련 | 2 |
 | 04 | 무엇을 만들까 — Spotfire급 BI Tool (12개 기능 연타) | 15 |
-| 05 | **결과부터** — 50 Days / 433 Commits / 160+ / 1,200+ | 8 |
-| 06 | 1단계 검증 — Prototype → Go/No-Go | 5 |
-| 07 | **본질적 문제** — AI Output ≫ Human Capacity (dark) | 5 |
-| 08 | Problem 01 → Everything on Web | 3 |
-| 09 | **Problem 02 → Test Everything** | 3 |
-| 10 | Problem 03 → Documentation for Human | 3 |
-| 11 | Problem 04 → Make Decisions Persistent | 4 |
-| 12 | **최종 구조** — 지금까지의 구조 vs 새로운 구조 비교 → 3층 아키텍처 | 4 |
-| 13 | 이 방식의 강력함 | 4 |
-| 14 | 정리하며 | 4 |
-| 15 | **다시 처음 질문** — 결론 (후반 dark 전환) | 7 |
-| 16 | **마무리 메시지** — 생각의 속도가 개발의 속도 → Q&A | 3 |
+| 05 | **결과부터** — 50 Days / 433 Commits / 160+ / 1,200+ | 6 |
+| 06 | **개발 방식의 변화** — 핵심 이해 · 즉시 개발 · 장기 위임 → 신뢰성 유지 → 4~5 Projects | 4 |
+| 07 | 1단계 검증 — Prototype → Go/No-Go | 5 |
+| 08 | **본질적 문제** — AI Output ≫ Human Capacity (dark) | 5 |
+| 09 | Problem 01 → Everything on Web | 3 |
+| 10 | **Problem 02 → Test Everything** | 3 |
+| 11 | Problem 03 → Documentation for Human | 3 |
+| 12 | Problem 04 → Make Decisions Persistent | 4 |
+| 13 | **최종 구조** — 지금까지의 구조 vs 새로운 구조 비교 → 3층 아키텍처 | 4 |
+| 14 | 이 방식의 강력함 | 4 |
+| 15 | 정리하며 | 4 |
+| 16 | **다시 처음 질문** — 결론 (후반 dark 전환) | 7 |
+| 17 | **마무리 — 걷어내기** — 3가지 회수 → "하나씩 걷어내는 것" | 2 |
+| 18 | **마지막 메시지** — 생각의 속도가 개발의 속도 → Q&A | 1 |
 
-**굵은 페이지**는 연출 비중이 큰 지점입니다. Page 4는 빠르게 연타, Page 15는 각 단계마다 충분히 쉬어가세요.
+**굵은 페이지**는 연출 비중이 큰 지점입니다. Page 4는 빠르게 연타, Page 16은 각 단계마다 충분히 쉬어가세요.
 
 ## 대본
 

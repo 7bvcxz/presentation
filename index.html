@@ -190,7 +190,7 @@
 
   <div class="pad" data-step="1">
     <span class="label acc" data-step="1">THE TARGET</span>
-    <h2 class="h3 mt16" data-step="1">Spotfire급 <span class="mark">BI Tool</span>을 혼자 만들어보자.</h2>
+    <h2 class="h3 mt16" data-step="1">Spotfire급 <span class="mark">BI Tool</span>을 AI로 만들어보자.</h2>
 
     <div class="feat-grid mt64">
       <div class="feat" data-step="2"><i>01</i><span>대용량 데이터 로드 / 저장</span></div>
@@ -216,7 +216,7 @@
   </div>
 
   <template class="notes"><h5>Page 4 · 무엇을 만들까?</h5>
-  <p>그럼 무엇으로 테스트할까 고민하다가, <em>Spotfire급 BI Tool</em>을 혼자 만들어보기로 했습니다.</p>
+  <p>그럼 무엇으로 테스트할까 고민하다가, <em>Spotfire급 BI Tool</em>을 AI로 만들어보기로 했습니다.</p>
   <p>왜 하필 BI Tool이냐면, 한 제품 안에 어려운 문제가 전부 들어있기 때문입니다.</p>
   <p><code>진행</code> 여기서는 항목을 <em>따다닥 빠르게</em> 넘기세요. 하나하나 설명하지 않습니다. “이 정도로 복잡하다”는 압도감만 주면 됩니다.</p>
   <ul>
@@ -240,7 +240,7 @@
   <div class="pad" data-step="1" style="justify-content:center">
     <div class="row" style="justify-content:space-between;align-items:baseline">
       <div><span class="label acc">MODULO · RESULT</span></div>
-      <div class="sub">혼자, 그리고 다른 프로젝트와 <span class="ink2">병행하면서</span></div>
+      <div class="sub">다른 프로젝트와 <span class="ink2">병행하면서</span></div>
     </div>
 
     <div class="metrics mt48">
@@ -277,17 +277,6 @@
     <div class="shots mt48" id="shotstrip" data-step="6" hidden></div>
   </div>
 
-  <div class="scene center veil" data-step="7" data-out="8">
-    <h1 class="h1">그리고 이 프로젝트만<br>개발한 것도 <span class="wk">아니었습니다.</span></h1>
-  </div>
-  <div class="scene center veil" data-step="8">
-    <div class="parallel row gap24" data-stagger>
-      <div class="pj"></div><div class="pj"></div><div class="pj"></div><div class="pj"></div><div class="pj"></div>
-    </div>
-    <h1 class="display mt48">4~5 Projects</h1>
-    <h2 class="h2 acc">in Parallel</h2>
-  </div>
-
   <template class="notes"><h5>Page 5 · 결과부터 말씀드리면 ★</h5>
   <p>결과부터 말씀드리면, <em>생각보다 훨씬 멀리 갔습니다.</em></p>
   <ul>
@@ -297,12 +286,65 @@
     <li><em>1,200개 이상의 테스트 케이스</em></li>
   </ul>
   <p>기능 커버리지는 Spotfire 대비 약 70% 수준까지 왔고, 성능은 오히려 앞선 지점도 있습니다. Marking 속도는 약 50배, 데이터 로드와 리포트 오픈은 2.5배 정도 빨라졌습니다. Scale-out, HA, 자동 복구까지 들어가 있고 API / MCP / LLM 연동도 되어 있습니다.</p>
-  <p>그리고 중요한 건, <em>이 프로젝트만 개발한 게 아니라는 점</em>입니다. 같은 기간에 4~5개 프로젝트를 병행했습니다.</p>
   <p><code>Tip</code> 숫자는 하나씩 천천히. 청중이 “진짜 많이 만들었네”라고 느낄 시간을 주세요.</p></template>
 </section>
 
 <!-- ============================================================
-     SLIDE 06 — 1단계 : 정말 만들 수 있을까?
+     SLIDE 06 — 개발 방식의 변화
+     ============================================================ -->
+<section class="slide" data-title="개발 방식의 변화">
+  <div class="pad" style="justify-content:center">
+    <span class="label acc">HOW IT CHANGED</span>
+    <h2 class="h2 mt16">개발 방식도 <span class="acc">바뀌었습니다.</span></h2>
+
+    <div class="verify-grid mt64" data-step="1" data-stagger>
+      <div class="vc">
+        <span class="ch-no">01</span>
+        <h3 class="h4 mt16">전체 코드 리뷰 대신<br>핵심을 이해한다</h3>
+        <p class="sub mt16">Architecture · Logic · 의사결정 사이의 이해관계</p>
+      </div>
+      <div class="vc">
+        <span class="ch-no">02</span>
+        <h3 class="h4 mt16">생각난 기능을<br>바로 개발한다</h3>
+        <p class="sub mt16">아이디어 → 즉시 반영</p>
+      </div>
+      <div class="vc">
+        <span class="ch-no">03</span>
+        <h3 class="h4 mt16">여러 요청을<br>오래 맡긴다</h3>
+        <p class="sub mt16">AI에게 동시에 · 긴 시간</p>
+      </div>
+    </div>
+
+    <div class="mt80 row" style="justify-content:center">
+      <span class="stamp" data-step="2"><svg class="ic"><use href="#i-check"/></svg> 그러면서도 서비스의 신뢰성은 유지</span>
+    </div>
+  </div>
+
+  <div class="scene center veil" data-step="3" data-out="4">
+    <h1 class="h1">그리고 이 프로젝트만<br>개발한 것도 <span class="wk">아니었습니다.</span></h1>
+  </div>
+  <div class="scene center veil" data-step="4">
+    <div class="parallel row gap24" data-stagger>
+      <div class="pj"></div><div class="pj"></div><div class="pj"></div><div class="pj"></div><div class="pj"></div>
+    </div>
+    <h1 class="display mt48">4~5 Projects</h1>
+    <h2 class="h2 acc">in Parallel</h2>
+  </div>
+
+  <template class="notes"><h5>Page 6 · 개발 방식의 변화</h5>
+  <p>숫자만 바뀐 게 아니라 <em>개발 방식 자체가 바뀌었습니다.</em></p>
+  <ul>
+    <li>모든 코드를 직접 리뷰하는 대신, <em>핵심 아키텍처와 로직, 의사결정 사이의 이해관계</em>를 이해하는 데 시간을 씁니다.</li>
+    <li>생각난 기능은 <em>바로</em> 개발합니다.</li>
+    <li>AI에게 <em>여러 요청을 오랜 시간 동안</em> 맡겨둡니다.</li>
+  </ul>
+  <p>그런데도 <em>서비스의 신뢰성은 유지</em>할 수 있었습니다. 그게 어떻게 가능했는지가 오늘 이야기의 나머지입니다.</p>
+  <p>그리고 중요한 건, <em>이 프로젝트만 개발한 게 아니라는 점</em>입니다. 같은 기간에 4~5개 프로젝트를 병행했습니다.</p>
+  <p><code>Tip</code> 세 카드는 빠르게 넘기고, “그런데도 신뢰성은 유지됐다”에서 한 박자 쉬세요.</p></template>
+</section>
+
+<!-- ============================================================
+     SLIDE 07 — 1단계 : 정말 만들 수 있을까?
      ============================================================ -->
 <section class="slide" data-title="1단계 — 검증">
   <div class="pad" data-out="3">
@@ -318,7 +360,7 @@
       <div class="vc">
         <span class="ch-no">02</span>
         <h3 class="h4 mt16">Big Data<br>Processing</h3>
-        <p class="sub mt16">Memory · Disk · Rust Core</p>
+        <p class="sub mt16">≥20GB · Pivot · Join · Add Column/Row</p>
       </div>
       <div class="vc">
         <span class="ch-no">03</span>
@@ -352,7 +394,7 @@
     </div>
   </div>
 
-  <template class="notes"><h5>Page 6 · 1단계 — 정말 만들 수 있을까?</h5>
+  <template class="notes"><h5>Page 7 · 1단계 — 정말 만들 수 있을까?</h5>
   <p>무작정 코딩부터 시작하지 않았습니다. <em>가장 어려운 것부터 먼저 검증</em>했습니다. 여기서 안 되면 뒤는 의미가 없으니까요.</p>
   <ul>
     <li><em>01 Interaction Performance</em> — Marking, Drill Down, Filtering이 실시간으로 되는가</li>
@@ -365,7 +407,7 @@
 </section>
 
 <!-- ============================================================
-     SLIDE 07 — AI 개발의 본질적인 문제   ★ TURNING POINT
+     SLIDE 08 — AI 개발의 본질적인 문제   ★ TURNING POINT
      ============================================================ -->
 <section class="slide dark" data-title="AI 개발의 본질적인 문제">
   <div class="scene center" data-out="1">
@@ -440,7 +482,7 @@
     </div>
   </div>
 
-  <template class="notes"><h5>Page 7 · AI 개발의 본질적인 문제 ★</h5>
+  <template class="notes"><h5>Page 8 · AI 개발의 본질적인 문제 ★</h5>
   <p>그런데 여기서 문제가 생깁니다. 성공담이 아니라 <em>속도가 만들어낸 새로운 문제</em> 이야기입니다.</p>
   <p>구조는 단순합니다. 사람은 키보드로 요구사항을 넣고, AI는 코드와 완료 메시지를 돌려줍니다. 그런데 <em>AI가 쏟아내는 결과의 양이 사람이 확인할 수 있는 양을 압도적으로 넘어섭니다.</em></p>
   <p>사람 쪽에는 이 루프가 계속 쌓입니다 — 프로그램 실행 → 기능 확인 → 테스트 → 결과 확인 → 다음 요청.</p>
@@ -454,7 +496,7 @@
 </section>
 
 <!-- ============================================================
-     SLIDE 08 — PROBLEM 01 → WEB
+     SLIDE 09 — PROBLEM 01 → WEB
      ============================================================ -->
 <section class="slide ps" data-title="Problem 01 → Web">
   <div class="pad">
@@ -476,11 +518,15 @@
         <i class="arr"></i>
         <div class="fnode"><svg class="ic"><use href="#i-ai"/></svg><span>AI</span><em>개발</em></div>
         <i class="arr"></i>
+        <div class="fstack">
+          <div class="fnode sm"><svg class="ic"><use href="#i-bolt"/></svg><span>Feature</span></div>
+          <div class="fnode sm"><svg class="ic"><use href="#i-flask"/></svg><span>Test Result</span></div>
+        </div>
+        <i class="arr"></i>
         <div class="fnode accent"><svg class="ic"><use href="#i-gear"/></svg><span>Auto Deploy</span><em>자동 배포</em></div>
         <i class="arr"></i>
         <div class="fstack">
           <div class="fnode sm"><svg class="ic"><use href="#i-browser"/></svg><span>Web</span></div>
-          <div class="fnode sm"><svg class="ic"><use href="#i-flask"/></svg><span>Test Result</span></div>
           <div class="fnode sm"><svg class="ic"><use href="#i-bell"/></svg><span>Notification</span></div>
         </div>
         <i class="arr"></i>
@@ -492,7 +538,7 @@
       </div>
       <div class="loop-wrap">
         <svg class="loopback" viewBox="0 0 1696 118" width="1696" height="118">
-          <path d="M1218 0 V74 Q1218 92 1200 92 H106 Q88 92 88 74 V12"/>
+          <path d="M1553 0 V74 Q1553 92 1535 92 H106 Q88 92 88 74 V12"/>
           <path class="head" d="M81 16 L88 0 L95 16 Z"/>
         </svg>
         <span class="loopback-label">확인 → 바로 다음 요청</span>
@@ -505,15 +551,15 @@
     </div>
   </div>
 
-  <template class="notes"><h5>Page 8 · Problem 01 → Web</h5>
+  <template class="notes"><h5>Page 9 · Problem 01 → Web</h5>
   <p>첫 번째 문제는 <em>개발 결과를 확인하는 것이 너무 느리다</em>는 것이었습니다. AI는 5분 만에 만들어놓는데, 저는 그걸 확인하려고 로컬에서 빌드하고 실행하고 클릭하고 있었습니다.</p>
-  <p>그래서 <em>모든 것을 웹에 올렸습니다.</em> AI가 개발을 끝내면 자동으로 배포되고, 웹 화면과 테스트 결과가 갱신되고, 알림이 옵니다.</p>
+  <p>그래서 <em>모든 것을 웹에 올렸습니다.</em> AI가 개발을 끝내면 기능과 테스트 결과가 나오고, 그게 자동으로 배포돼서 웹 화면이 갱신되고 알림이 옵니다.</p>
   <p>그 결과 <em>요청 → 완료 → 바로 확인</em>이 하나의 흐름이 됐습니다. 폰으로도 확인이 되니까 이동 중에도 다음 요청을 보낼 수 있습니다.</p>
   <p>별것 아닌 것 같지만, 확인 시간이 줄어드는 만큼 전체 개발 사이클이 통째로 빨라집니다.</p></template>
 </section>
 
 <!-- ============================================================
-     SLIDE 09 — PROBLEM 02 → TEST   ★ CORE PHILOSOPHY
+     SLIDE 10 — PROBLEM 02 → TEST   ★ CORE PHILOSOPHY
      ============================================================ -->
 <section class="slide ps" data-title="Problem 02 → Test">
   <div class="pad">
@@ -573,7 +619,7 @@
     </div>
   </div>
 
-  <template class="notes"><h5>Page 9 · Problem 02 → Test ★</h5>
+  <template class="notes"><h5>Page 10 · Problem 02 → Test ★</h5>
   <p>두 번째 문제는 신뢰입니다. <em>AI가 만든 코드를 믿을 수 없다.</em> 그럴듯하게 잘 만든 것 같은데, 어딘가 조용히 틀려 있습니다.</p>
   <p>그래서 접근을 바꿨습니다. AI를 더 똑똑하게 만들려고 하는 대신, <em>틀려도 통과하지 못하는 구조</em>를 만들었습니다.</p>
   <p>기능이 하나 생기면 반드시 같이 생기는 것들이 있습니다.</p>
@@ -588,7 +634,7 @@
 </section>
 
 <!-- ============================================================
-     SLIDE 10 — PROBLEM 03 → DOCUMENTATION
+     SLIDE 11 — PROBLEM 03 → DOCUMENTATION
      ============================================================ -->
 <section class="slide ps" data-title="Problem 03 → Documentation">
   <div class="pad">
@@ -646,7 +692,7 @@
     </div>
   </div>
 
-  <template class="notes"><h5>Page 10 · Problem 03 → Documentation</h5>
+  <template class="notes"><h5>Page 11 · Problem 03 → Documentation</h5>
   <p>세 번째 문제. 개발은 빨라졌는데 <em>사람의 이해 속도가 따라가지 못합니다.</em> 하루에 수십 개씩 바뀌는 코드를 전부 읽는 건 불가능합니다.</p>
   <p>그래서 AI가 개발을 하면 <em>사람이 읽을 문서</em>도 같이 만들게 했습니다. 아키텍처, 로직, 결정 사항, 다이어그램, 릴리스 노트가 <code>/doc</code>에 계속 쌓입니다.</p>
   <p>이제 저는 코드를 전부 읽지 않습니다. <em>시스템의 로직을 이해</em>합니다. 그리고 중요한 건, 몇 주 뒤에 다시 봐도 이해할 수 있다는 점입니다.</p>
@@ -654,7 +700,7 @@
 </section>
 
 <!-- ============================================================
-     SLIDE 11 — PROBLEM 04 → DECISIONS
+     SLIDE 12 — PROBLEM 04 → DECISIONS
      ============================================================ -->
 <section class="slide ps" data-title="Problem 04 → Decisions">
   <div class="pad">
@@ -693,19 +739,19 @@
 
     <div class="ps-foot" data-step="3">
       <h2 class="h3">AI의 기억력을 믿지 않는다.</h2>
-      <h2 class="h3 acc mt16" data-step="4">Project가 기억하게 만든다.</h2>
+      <h2 class="h3 acc mt16" data-step="4">Decisions가 기억하게 만든다.</h2>
     </div>
   </div>
 
-  <template class="notes"><h5>Page 11 · Problem 04 → Decisions</h5>
+  <template class="notes"><h5>Page 12 · Problem 04 → Decisions</h5>
   <p>네 번째 문제는 기억입니다. <em>AI도 과거의 의사결정을 잊습니다.</em> 지난주에 “이건 이렇게 가기로 했다”고 정해놓은 걸, 새 세션에서는 아무렇지 않게 다르게 만듭니다.</p>
   <p>그래서 의사결정을 프로젝트 안에 남기게 했습니다. 새 작업이 들어오면 <em>먼저 관련된 Decisions를 검색</em>하고, 이전 아키텍처와 규칙을 확인한 다음에 개발을 시작합니다. 끝나면 새로 내린 결정을 다시 기록합니다.</p>
   <p>여기에는 “왜 Rust 코어를 썼는지”, “권한 모델 규칙”, “차트 렌더링 방식”, 그리고 <em>하지 말아야 할 것</em>들이 들어 있습니다.</p>
-  <p>결론은 이겁니다. <em>AI의 기억력을 믿지 않는다. 대신 프로젝트가 기억하게 만든다.</em></p></template>
+  <p>결론은 이겁니다. <em>AI의 기억력을 믿지 않는다. 대신 Decisions가 기억하게 만든다.</em></p></template>
 </section>
 
 <!-- ============================================================
-     SLIDE 12 — 최종 구조   ★ CORE ARCHITECTURE
+     SLIDE 13 — 최종 구조   ★ CORE ARCHITECTURE
      ============================================================ -->
 <section class="slide" data-title="최종 구조">
   <div class="pad" data-out="3">
@@ -857,7 +903,7 @@
     <p class="lead mt32" data-step="4" style="text-align:center">사람은 <span class="ink2">시스템을 통해</span> AI를 본다. AI는 <span class="ink2">시스템을 통해</span> 과거를 본다.</p>
   </div>
 
-  <template class="notes"><h5>Page 12 · 최종 구조 ★</h5>
+  <template class="notes"><h5>Page 13 · 최종 구조 ★</h5>
   <p>지금까지 나온 네 가지 문제를 해결하고 나니, 개발 구조 자체가 바뀌었습니다. 왼쪽이 예전이고 오른쪽이 지금입니다.</p>
   <p><em>왼쪽 — 지금까지의 구조.</em> 화살표가 전부 사람에게서 출발합니다.</p>
   <ul>
@@ -880,7 +926,7 @@
 </section>
 
 <!-- ============================================================
-     SLIDE 13 — 이 방식의 강력함
+     SLIDE 14 — 이 방식의 강력함
      ============================================================ -->
 <section class="slide" data-title="이 방식의 강력함">
   <div class="pad">
@@ -926,19 +972,17 @@
   <div class="scene center veil" data-step="4">
     <h2 class="h2 faded"><s>“어떻게 구현하지?”</s></h2>
     <h1 class="display mt48">무엇을 해결하지?<br><span class="acc">무엇을 만들지?</span></h1>
-    <p class="lead mt48">생각의 속도를 개발 속도로 바꾼다.</p>
   </div>
 
-  <template class="notes"><h5>Page 13 · 이 방식의 강력함</h5>
+  <template class="notes"><h5>Page 14 · 이 방식의 강력함</h5>
   <p>왜 이 구조가 특히 지금 중요한가를 말씀드리고 싶습니다.</p>
   <p>기존에는 하루에 기능 하나 정도였습니다. 지금은 하루에 10개, 20개, 40개씩 바뀝니다. 그런데 <em>사람의 확인 능력은 그대로</em>입니다.</p>
   <p>이 격차를 사람이 메우려고 하면 무너집니다. 그래서 그 사이를 <em>자동화가 흡수</em>하게 만든 겁니다 — 테스트, 문서화, 상태 관리, 회귀 검증, 벤치마크, 모니터링.</p>
-  <p>그러면 개발자가 쓰는 시간의 성격이 바뀝니다. <em>“어떻게 구현하지?”</em>를 고민하던 시간이 줄고, <em>“무엇을 해결하지? 무엇을 만들지?”</em>가 남습니다.</p>
-  <p>결국 <em>생각의 속도를 개발 속도로 바꾸는 것</em>입니다.</p></template>
+  <p>그러면 개발자가 쓰는 시간의 성격이 바뀝니다. <em>“어떻게 구현하지?”</em>를 고민하던 시간이 줄고, <em>“무엇을 해결하지? 무엇을 만들지?”</em>가 남습니다.</p></template>
 </section>
 
 <!-- ============================================================
-     SLIDE 14 — 정리하며
+     SLIDE 15 — 정리하며
      ============================================================ -->
 <section class="slide" data-title="정리하며">
   <div class="pad" style="justify-content:center">
@@ -969,7 +1013,7 @@
     </div>
   </div>
 
-  <template class="notes"><h5>Page 14 · 정리하며</h5>
+  <template class="notes"><h5>Page 15 · 정리하며</h5>
   <p>오늘 이야기를 세 가지로 정리하겠습니다.</p>
   <ul>
     <li><em>01</em> 개인도 상당히 큰 서비스를 AI와 함께 개발할 수 있습니다. 50일 만에 상용 BI 툴의 70% 수준까지 갔습니다.</li>
@@ -980,7 +1024,7 @@
 </section>
 
 <!-- ============================================================
-     SLIDE 15 — 다시 처음 질문   ★ CONCLUSION
+     SLIDE 16 — 다시 처음 질문   ★ CONCLUSION
      ============================================================ -->
 <section class="slide" data-title="다시 처음 질문" data-dark-at="5">
   <div class="scene center" data-out="1"><h1 class="display">그래서,</h1></div>
@@ -1014,54 +1058,64 @@
     <h1 class="h1">그렇다고<br>안심할 수도 <span class="acc">없습니다.</span></h1>
   </div>
 
-  <div class="scene center" data-step="6" data-out="7">
+  <div class="scene center" data-step="6">
     <h1 class="h2" style="max-width:1560px">AI를 잘 사용하는 개발자와<br>그렇지 않은 개발자의 격차는<br><span class="acc">점점 커질 것입니다.</span></h1>
-  </div>
-
-  <div class="scene center" data-step="7">
-    <span class="label acc">THE REAL BOTTLENECK</span>
-    <h1 class="display mt32" style="max-width:1560px">결국 병목은<br><span class="acc">인간의 생각과 판단</span><br>속도가 됩니다.</h1>
-    <div class="why mt72" data-stagger>
-      <div class="wy"><i>WHY 01</i><b>반복 / 저중요 업무 해결</b><span>사람이 붙잡고 있던 일이 시스템으로 넘어간다</span></div>
-      <div class="wy"><i>WHY 02</i><b>AI 사용 환경 효율화</b><span>확인 · 테스트 · 문서가 자동으로 따라온다</span></div>
+    <div class="why mt64" data-stagger>
+      <div class="wy" data-step="7"><i>WHY 01</i><b>반복 / 저중요 업무 해결</b><span>사람이 붙잡고 있던 일이 시스템으로 넘어간다</span></div>
+      <div class="wy" data-step="7"><i>WHY 02</i><b>AI 사용 환경 효율화</b><span>확인 · 테스트 · 문서가 자동으로 따라온다</span></div>
     </div>
   </div>
 
-  <template class="notes"><h5>Page 15 · 다시 처음 질문 ★</h5>
+  <template class="notes"><h5>Page 16 · 다시 처음 질문 ★</h5>
   <p>그래서 처음 질문으로 돌아가겠습니다. <em>AI가 개발자를 대체할 수 있을까요?</em></p>
   <p><code>Tip</code> 여기서 3~4초 정도 그냥 두세요. 청중이 각자 생각하게.</p>
   <p>제 생각은 <em>아직은 어렵다</em>입니다. 구현 속도는 정말 수십 명이 붙은 것처럼 빨라졌습니다. 그런데 <em>중요한 의사결정에서는 여전히 이상한 선택</em>을 합니다. 그리고 그 판단이 틀렸을 때 책임지고 방향을 바꾸는 건 결국 사람입니다.</p>
   <p>그래서 개발자는 아직 필요합니다. <em>그렇다고 안심할 수도 없습니다.</em></p>
   <p><em>AI를 잘 사용하는 개발자와 그렇지 않은 개발자의 격차는 점점 커질 겁니다.</em></p>
-  <p>마지막으로 이 말씀을 드리고 싶습니다. 개발이 극도로 빨라지면, <em>결국 병목은 인간의 생각과 판단 속도</em>가 됩니다.</p></template>
+  <p>이유는 두 가지입니다. 하나는 <em>반복적이고 중요도 낮은 업무</em>가 사람 손을 떠나 시스템으로 넘어가기 때문이고, 다른 하나는 <em>AI를 쓰는 환경 자체가 효율화</em>되면서 확인·테스트·문서가 자동으로 따라오기 때문입니다.</p></template>
 </section>
 
 <!-- ============================================================
-     SLIDE 16 — 마무리 메시지 + Q&A   ★ LAST MESSAGE
+     SLIDE 17 — 마무리 : 걷어내기
      ============================================================ -->
-<section class="slide" data-title="마무리 · Q&amp;A">
-  <div class="scene center" data-out="2">
-    <p class="lead" style="max-width:1300px">AI 사용 환경과 사용법을 <span class="ink2">극한으로 효율화해서</span><br>불필요한 부분을 모두 제거하면</p>
-    <h1 class="h1 mt48" data-step="1">생각의 속도로<br>개발할 수 있게 됩니다.</h1>
+<section class="slide" data-title="마무리 · 걷어내기">
+  <div class="scene center">
+    <span class="label acc">THE POINT</span>
+    <div class="row gap24 mt48" data-stagger>
+      <span class="node"><svg class="ic"><use href="#i-browser"/></svg>웹으로 바로 확인</span>
+      <span class="node"><svg class="ic"><use href="#i-flask"/></svg>테스트가 자동으로 수행</span>
+      <span class="node"><svg class="ic"><use href="#i-doc"/></svg>문서와 결정이 자동으로</span>
+    </div>
+    <h2 class="h2 mt64" data-step="1">전부, 생각과 개발 사이에 끼어 있는 것들을<br><span class="acc">하나씩 걷어내는 것</span></h2>
+    <p class="lead mt64" data-step="2">AI 사용 환경과 사용법을 <span class="ink2">극한으로 효율화해서</span><br>불필요한 부분을 모두 제거하면,</p>
   </div>
 
-  <div class="scene center" data-step="2" data-out="3">
+  <template class="notes"><h5>Page 17 · 마무리 — 걷어내기</h5>
+  <p>마지막으로 한 가지만 더 말씀드리고 싶습니다.</p>
+  <p>오늘 보여드린 것들 — <em>웹으로 바로 확인하고, 테스트가 자동으로 돌고, 문서와 결정이 자동으로 쌓이는 것</em> — 전부 이 한 가지를 위한 겁니다.</p>
+  <p><em>생각과 개발 사이에 끼어 있는 것들을 하나씩 걷어내는 것.</em></p>
+  <p>그래서 <em>AI 사용 환경과 사용법을 극한으로 효율화해서 불필요한 부분을 모두 제거하면,</em></p>
+  <p><code>Tip</code> 여기서 문장을 끊고 다음 장으로 넘기세요. 마지막 문장은 다음 화면에서 완성됩니다.</p></template>
+</section>
+
+<!-- ============================================================
+     SLIDE 18 — 마지막 메시지 + Q&A   ★ LAST MESSAGE
+     ============================================================ -->
+<section class="slide" data-title="마무리 · Q&amp;A">
+  <div class="scene center" data-out="1">
     <span class="label acc">THE LAST MESSAGE</span>
     <h1 class="display mt32" style="font-size:118px;max-width:1620px">생각의 속도가<br><span class="acc">개발의 속도가 될 수 있습니다.</span></h1>
   </div>
 
-  <div class="scene center" data-step="3">
+  <div class="scene center" data-step="1">
     <p class="ghost-q">생각의 속도가 개발의 속도가 될 수 있습니다.</p>
     <h1 class="display">Q&amp;A</h1>
     <p class="lead mt48">들어주셔서 감사합니다.</p>
   </div>
 
-  <template class="notes"><h5>Page 16 · 마무리 메시지 ★</h5>
-  <p>마지막으로 한 가지만 더 말씀드리고 싶습니다.</p>
-  <p><em>AI 사용 환경과 사용법을 극한으로 효율화해서 불필요한 부분을 모두 제거하면,</em> 결국 <em>생각의 속도로 개발할 수 있게 됩니다.</em></p>
-  <p>오늘 보여드린 것들 — 웹으로 바로 확인하고, 테스트가 자동으로 돌고, 문서와 결정이 자동으로 쌓이는 것 — 전부 이 한 가지를 위한 겁니다. 생각과 개발 사이에 끼어 있는 것들을 하나씩 걷어내는 것.</p>
-  <p>그래서 <em>AI 활용법을 계속 다듬다 보면</em> 이렇게 됩니다.</p>
-  <p><em>“생각의 속도가 개발의 속도가 될 수 있습니다.”</em></p>
+  <template class="notes"><h5>Page 18 · 마지막 메시지 ★</h5>
+  <p>(앞 장에서 이어서) <em>“생각의 속도가 개발의 속도가 될 수 있습니다.”</em></p>
+  <p>AI 활용법을 계속 다듬다 보면 결국 여기까지 옵니다.</p>
   <p><code>Tip</code> 이 문장에서 멈추세요. 여기가 발표의 마지막입니다. 한 박자 쉬고 Q&amp;A로 넘어갑니다.</p>
   <p><code>예상 질문</code></p>
   <ul>
@@ -1075,12 +1129,12 @@
 </div><!-- /#stage -->
 
 <div id="progress"></div>
-<div id="pager"><span class="cur">01</span> / 16</div>
+<div id="pager"><span class="cur">01</span> / 18</div>
 <div id="brandmark">AI × Development System</div>
 </div><!-- /#deck -->
 
 <aside id="notes">
-  <div class="nhead"><span>Speaker Note</span><b id="nPage">01 / 16</b></div>
+  <div class="nhead"><span>Speaker Note</span><b id="nPage">01 / 18</b></div>
   <div class="nbody" id="nBody"></div>
   <div class="nfoot">N 노트 · ? 도움말 · F 전체화면</div>
 </aside>
