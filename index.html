@@ -277,15 +277,20 @@
     <span class="label acc">WHERE WE ARE NOW</span>
     <h1 class="h1 mt32">가능성은 <span class="acc">확인했습니다.</span></h1>
 
-    <div class="row gap20 mt64" data-stagger>
-      <span class="node"><svg class="ic"><use href="#i-check"/></svg>Prototype</span>
-      <i class="arr"></i>
-      <span class="node accent"><svg class="ic"><use href="#i-layers"/></svg>Architecture 구상</span>
-      <i class="arr"></i>
-      <span class="node ghost">Development</span>
+    <div class="meters mt64" style="text-align:left">
+      <div class="mt-row" style="grid-template-columns:400px 640px 400px">
+        <span class="mt-name">PROTOTYPE</span>
+        <div class="cells"><div class="cells-fill" style="width:506px"></div></div>
+        <span class="mt-val">어느 정도 확인</span>
+      </div>
+      <div class="mt-row" style="grid-template-columns:400px 640px 400px">
+        <span class="mt-name">DEVELOPMENT</span>
+        <div class="cells"><div class="cells-fill" style="width:58px"></div></div>
+        <span class="mt-val acc">약 10%</span>
+      </div>
     </div>
 
-    <p class="lead mt56">아직 여기까지입니다.<br>그리고 이제, <span class="ink2">뛰어들어보려고 합니다.</span></p>
+    <p class="lead mt56">남은 문제는 아직 많습니다.<br>그래도 이제, <span class="ink2">뛰어들었습니다.</span></p>
   </div>
 
   <template class="notes"><h5>Page 5 · 1단계 — 정말 만들 수 있을까?</h5>
@@ -297,8 +302,8 @@
   <p>방식은 단순합니다. Challenge를 ChatGPT와 Claude Code에 던지고 → 아이디어를 받고 → 프로토타입을 만들고 → 벤치마크를 돌리고 → Go / No-Go를 판단합니다.</p>
   <p>여기서 나온 핵심 아이디어들입니다. 인터랙션은 전용 자료구조로 50ms 이내, 무거운 연산은 Rust 코어로 오프로딩, 큰 데이터는 메모리와 디스크를 같이 쓰는 방향으로.</p>
   <p>프로토타입 결과를 보고 솔직히 이런 생각이 들었습니다. <em>“어… 이거 진짜 되겠는데?”</em></p>
-  <p>정리하면 <em>가능성은 확인했습니다.</em> 다만 지금 있는 건 <em>프로토타입까지</em>입니다. 지금은 <em>아키텍처를 구상하는 단계</em>고, 본 개발은 아직 시작 전입니다.</p>
-  <p>그래서 이제, <em>뛰어들어보려고 합니다.</em></p>
+  <p>정리하면 <em>가능성은 어느 정도 확인했습니다.</em> 그렇다고 다 풀린 건 아닙니다. <em>남은 문제는 아직 많습니다.</em></p>
+  <p>그 상태에서 실제 개발을 시작했고, 지금 <em>10% 정도</em> 와 있습니다. 그래서 이제, <em>뛰어들었습니다.</em></p>
   <p><code>Tip</code> 여기서 과장하지 마세요. “된다”가 아니라 “되겠다”까지만 말하는 것이 이 발표의 톤입니다.</p></template>
 </section>
 
@@ -1054,7 +1059,7 @@
   <template class="notes"><h5>Page 17 · 마지막 메시지 ★</h5>
   <p>(앞 장에서 이어서) <em>“생각의 속도가 개발의 속도가 될 수 있습니다.”</em></p>
   <p>AI 활용법을 계속 다듬다 보면 결국 여기까지 옵니다.</p>
-  <p><code>구두</code> Q&amp;A를 닫을 때 화면에 없는 이야기를 한 줄로 얹으세요 — <em>“지금은 아키텍처 구상 단계입니다. 같이 해보고 싶은 분은 끝나고 편하게 말 걸어주세요.”</em></p>
+  <p><code>구두</code> Q&amp;A를 닫을 때 화면에 없는 이야기를 한 줄로 얹으세요 — <em>“이제 막 개발을 시작해서 10% 정도 와 있습니다. 같이 해보고 싶은 분은 끝나고 편하게 말 걸어주세요.”</em></p>
   <p><code>Tip</code> 이 문장에서 멈추세요. 여기가 발표의 마지막입니다. 한 박자 쉬고 Q&amp;A로 넘어갑니다.</p>
   <p><code>예상 질문</code></p>
   <ul>

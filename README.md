@@ -7,8 +7,8 @@
 > - 제품(BI Tool)의 **실체·진척도·실적 수치를 일절 노출하지 않습니다.**
 >   (Days / Commits / Features / Test Cases / 기능 커버리지 / 성능 배수 / 병행 프로젝트 수)
 > - 말할 수 있는 범위는 **"Spotfire를 대체할 만한지 프로토타입으로 검증했고, 착수는 가능해 보인다. 다만 이제 시작 단계다"** 까지입니다.
-> - 검증한 것은 **01 Interaction Performance / 02 Big Data Processing 두 가지 프로토타입까지**입니다.
->   현재 위치는 **Architecture 구상 단계**이며 본 개발은 시작 전입니다.
+> - 검증한 것은 **01 Interaction Performance / 02 Big Data Processing 두 가지 프로토타입**까지입니다.
+>   현재 위치는 **남은 문제가 많은 상태에서 개발을 막 시작한 약 10% 지점**입니다.
 > - 발표 목표는 실적 자랑이 아니라 **함께할 사람과의 접점 만들기**입니다. 다만 화면에는 넣지 않고,
 >   발표자가 Q&A를 닫을 때 **구두로만** 전합니다. (17페이지 Speaker Note에 문구가 있습니다.)
 >
@@ -75,7 +75,7 @@ assets/       (선택) modulo-1..4.png
 | 02 | AI 개발 Challenge (dark) | 4 |
 | 03 | 직접 해보자 — 4개 시련 | 2 |
 | 04 | 무엇을 만들까 — Spotfire급 BI Tool (12개 기능 연타) | 15 |
-| 05 | **1단계 검증** — 01·02만 Prototype 검증 → Go/No-Go → "가능성은 확인 / Architecture 구상 단계" | 6 |
+| 05 | **1단계 검증** — 01·02만 Prototype 검증 → Go/No-Go → 진척 미터(Prototype 어느 정도 / Development 약 10%) | 6 |
 | 06 | **개발 방식의 변화** — 핵심 이해 · 즉시 개발 · 장기 위임 → "신뢰성은 누가 지키나?" | 2 |
 | 07 | **본질적 문제** — AI Output ≫ Human Capacity (dark) | 5 |
 | 08 | Problem 01 → Everything on Web | 3 |
