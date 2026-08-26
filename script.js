@@ -91,6 +91,7 @@
     var tpl = slides[cur].querySelector('template.notes');
     nBody.innerHTML = tpl ? tpl.innerHTML : '<p class="muted">—</p>';
     if (location.hash !== '#/' + (cur + 1)) history.replaceState(null, '', '#/' + (cur + 1));
+    sendState();
   }
   function pad(n) { return (n < 10 ? '0' : '') + n; }
 
@@ -139,6 +140,7 @@
       else document.exitFullscreen();
     }
     else if (k === 'n' || k === 'N') notes.classList.toggle('open');
+    else if (k === 'p' || k === 'P') openPrompter();
     else if (k === '?' || k === '/') help.classList.toggle('open');
     else if (k >= '1' && k <= '9' && e.altKey) show(+k - 1, 0);
   });
@@ -155,6 +157,46 @@
     var d = e.changedTouches[0].clientX - tx;
     if (Math.abs(d) > 60) { d < 0 ? next() : prev(); }
   }, { passive: true });
+
+  /* ---------- prompter sync ----------
+     같은 브라우저에서 prompter.html 을 열면 페이지 이동이 자동으로 전달된다.
+     리모컨(키보드)이 어느 창에 잡혀 있든 양쪽 모두에서 조작할 수 있다. */
+  var CH = null;
+  try { CH = new BroadcastChannel('deck-sync'); } catch (e) { CH = null; }
+
+  var titles = slides.map(function (s) { return s.dataset.title || ''; });
+
+  function sendState() {
+    var msg = {
+      from: 'deck', type: 'state',
+      slide: cur + 1, step: step, maxStep: stepsOf[cur],
+      total: slides.length, titles: titles
+    };
+    try { if (CH) CH.postMessage(msg); } catch (e) {}
+    try { localStorage.setItem('deck-state', JSON.stringify(msg) + '|' + Date.now()); } catch (e) {}
+  }
+
+  function onNav(m) {
+    if (!m || m.from === 'deck' || m.type !== 'nav') return;
+    var d = m.dir;
+    if (d === 'next') next();
+    else if (d === 'prev') prev();
+    else if (d === 'nextSlide') nextSlide();
+    else if (d === 'prevSlide') prevSlide();
+    else if (d === 'home') show(0, 0);
+    else if (d === 'end') show(slides.length - 1, stepsOf[slides.length - 1]);
+    else if (d === 'goto') show(m.slide - 1, 0);
+    else if (d === 'hello') sendState();
+  }
+  if (CH) CH.onmessage = function (e) { onNav(e.data); };
+  window.addEventListener('storage', function (e) {
+    if (e.key !== 'deck-nav' || !e.newValue) return;
+    try { onNav(JSON.parse(e.newValue.split('|')[0])); } catch (err) {}
+  });
+
+  function openPrompter() {
+    window.open('prompter.html', 'prompter', 'width=1400,height=900');
+  }
 
   /* ---------- optional screenshots (assets/modulo-*.png) ---------- */
   (function shots() {
